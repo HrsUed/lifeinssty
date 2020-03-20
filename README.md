@@ -1,3 +1,5 @@
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/HrsUed/lifeinssty)
+
 # 概要
 このパッケージは生命保険数学に必要なアクチュアリー記号を出力するためのコマンドを提供しています。
 基本的にはLaTeX 2e標準のパッケージやamsmath等のパッケージですべて補える記号ですが、入力の省略と同時に、記号の意味を著者が一目で判断できるようにしておく必要があります。
