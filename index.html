@@ -1,0 +1,73 @@
+<<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="TeX,アクチュアリー,生保数理,生命保険,アクチュアリー,アクチュアリー関数,アクチュアリー記号,actuary,sty,dtx,ins,パッケージ,スタイルファイル,理系倉庫,理系,倉庫">
+  <title>TeX用アクチュアリー記号パッケージ</title>
+  <link rel="stylesheet" href="">
+  <style>
+    body {text-align:center}
+  </style>
+</head>
+<body>
+  <h1>
+    pLaTeX2e専用<br>
+    生命保険数学アクチュアリー記号パッケージ<br>
+    lifeins.sty
+  </h1>
+  <hr>
+  <h2>バージョン情報</h2>
+  <p>
+    現在のバージョンは<em>3.1</em>です。<br>
+    このバージョンでは、生命保険数学のほぼ全ての記号をカバーしています。<br>
+  </p>
+  <p>
+    このパッケージを使用すると、以下のような出力を得ることができます。
+  </p>
+  <img src="lifeinsdemo.png" width=1225 height=208 alt="例">
+
+  <h2>公式集</h3>
+  <p>
+    このパッケージ（v2.2）を利用した生保数理のデモ用公式集を作成しました。<br>
+    試験対策用教科書（二見さん）にほぼ準拠しており、現在第12章までをカバーしています。<br>
+    （注意）A5サイズです。
+    <a href="ActuarialFormulas.pdf">公式集をダウンロード</a>
+  </p>
+  <h2>使い方</h2>
+  <h3>簡易ダウンロード</h3>
+  <p>
+    <a href="lp_lifeins.zip">ダウンロード</a>
+    スタイルファイルと<a href="lifeins.pdf">PDFドキュメント</a>のセットです。
+  </p>
+  <h3>通常ダウンロード</h3>
+  <ol>
+  <li><a href="lifeins.zip" size=3>ここ</a>からlifeins.zipをダウンロードする。</li>
+  <li>ダウンロードしたzipファイルを解凍し、適当な場所にファイルlifeins.ins、lifeins.dtxを保存する。</li>
+  <li>コマンドプロンプトでこれらのファイルがある場所まで移動。</li>
+  <li>platex lifeins.insを実行。スタイルファイルlifeins.styの生成。</li>
+  <li>platex lifeins.dtxを実行。ドキュメントlifeins.dviの生成。その際、処理が途中で止まっても、構わずにEnterを押してください。</li>
+  <li>"Transcript written on lifeins.log."と表示されれば、正常に終了です。</li>
+  <li>正常に終了すれば、スタイルファイルlifeins.sty、ドキュメントlifeins.dviが生成されます。</li>
+  <li>パッケージを使用したいtexファイルのブリアンブルでlifeins.styを読み込みます。</li>
+  <li>コマンドの詳細はドキュメントをご覧ください。</li>
+  </ol>
+  <h2>
+  更新、バグ、回避法、予定改良点報告
+  </h2>
+  <ul>
+  <li>2012/1/15　v3.1　\balignの位置を調整。</li>
+  <li>2011/02/08　v3.0を公開しました。v2.2からの主な変更点：\overtortoiseを追加。\alignsepにて保険者と順序の間のスペースを調整できるようにした。\orderとそれに関連するコマンドを追加。それに伴い、\aa, \baを廃止。</li>
+  <li>2010/12/02　簡易ダウンロードファイルへのリンクを訂正しました．</li>
+  <li>2010/07/23　バージョンアップしました。主に、displaystyle中などでも正常に出力されるようにしました。</li>
+  <li>2010/7/15　\lisymb内で\joint[^]{xyz}[1]などとし、かつ\lisymbの(k)オプションを指定している場合、これと1が重なってしまいます。この場合、(k)オプションを指定せず、\lisymbの後に上付き^{\raisebox{1ex}{$\scriptstyle (k)$}}などとすることで回避することができます。</li>
+  <li>2010/7/15　\annuityにて保険期間を背の高い文字にすると分割を表す(k)とかぶってしまいます。この場合、オプションで(k)を指定せず、\annuity{a}{}{n}^{(k)}とすると回避することができます。</li>
+  </ul>
+  <p><font size=5 color="red">
+  使用者は、このパッケージを自由に改編することができます。<br>
+  ただし、再配布する場合は私までその旨をお知らせください。</font>
+  </p>
+  <p>
+  リンクはご自由にどうぞ。
+</body>
+</html>

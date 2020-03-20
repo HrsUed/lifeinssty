@@ -1,0 +1,1402 @@
+% \CheckSum{0}
+% \iffalse
+%<package>\NeedsTeXFormat{pLaTeX2e}
+%<package>\ProvidesPackage{lifeins}[2012/01/15 v3.1 Life actuarial symbols]%
+%<package>\PackageInfo{lifeins}{This package provides commands to type life actuarial symbols}
+%<*driver>
+\documentclass{jltxdoc}
+\usepackage{lifeins}
+\setcounter{StandardModuleDepth}{1}
+\GetFileInfo{lifeins.sty}
+\begin{document}
+  \DocInput{lifeins.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \setlength{\topmargin}{0pt}
+% \addtolength{\textheight}{3\baselineskip}
+% \setlength{\oddsidemargin}{2cm}
+% \setlength{\evensidemargin}{2cm}
+% \renewcommand{\arraystretch}{1.3}
+% \title{生命保険アクチュアリー記号{\TeX}パッケージ\fileversion}
+% \author{Ueda, H.\\http://space.geocities.jp/funasking/}
+% \date{\filedate }
+% \maketitle
+%
+% このパッケージは生命保険数学に必要なアクチュアリー記号を出力するためのコマンドを提供しています。
+% 基本的には\LaTeXe 標準のパッケージやamsmath等のパッケージですべて補える記号ですが、
+% 入力の省略と同時に、記号の意味を著者が一目で判断できるようにしておく必要があります。
+% したがって、ここでアクチュアリー記号を与えるコマンドを定義する意義は大いにあると考えております。
+%
+% なお、このパッケージで与えるコマンドはすべて数式モード内で入力してください。
+% また、出力例ではわざとおかしな出力を与えている箇所がありますが、
+% それは注意のためのものであって、ミスではありません。
+%
+% また、このパッケージが与えるコマンドの定義は、
+% マクロ初心者の著者がスパイラル方式で作成したものばかりです。
+% したがって、その定義はスマートでもエレガントでもない、泥臭い定義ばかりです。
+% その点が気になる方は、適宜変更して頂いても構いません。
+% その際は、著者に一言アドバイスを頂けるとありがたく存じます。
+%
+% \StopEventually{}
+%
+% \section{コマンド}
+% \subsection{デフォルトコマンド}
+% \subsubsection{デフォルトコマンド}
+%
+% 予定利率は通常、$i$と書かれます。また、現価率は$v$で表されます。
+% その他の金利計算等の基本的な記号は、特別に定義する必要のない記号ばかりです。
+% 以下に一例を示しておきます。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{cllcll}\hline
+% 意味 & 出力 & 入力 & 意味 & 出力 & 入力 \\ \hline \hline
+% 予定利率		&	$i$					&	\verb|i|						&
+% 現価率		&	$v$					&	\verb|v|						\\ \hline
+% 割引率		&	$d$					&	\verb|d|						&
+% 利力			&	$\delta$			&	\verb|\delta|					\\ \hline
+% 生存者数		&	$l_{x},\;\ell_{x}$	&	\verb|l_{x}|, \verb|\ell_{x}|	&
+% 死亡者数		&	$d_{x}$				&	\verb|d_{x}|					\\ \hline
+% \end{tabular}
+% \end{table}
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{cll}\hline
+% 意味 & 出力 & 入力 \\ \hline \hline
+% 生存率		&	$p_{x}$				&	\verb|p_{x}|					\\ \hline
+% 				&	${}_{n}p_{x}$		&	\verb|{}_{n}p_{x}|				\\ \hline
+% 死亡率		&	$q_{x}$				&	\verb|q_{x}|					\\ \hline
+% 				&	${}_{n}q_{x}$		&	\verb|{}_{n}q_{x}|				\\ \hline
+% 死力			&	$\mu_{x}$			&	\verb|\mu_{x}|					\\ \hline
+% 略算平均余命	&	$e_{x}$				&	\verb|e_{x}|					\\ \hline
+% 完全平均余命	&	$\mathring{e}_{x}$	&	\verb|\mathring{e}_{x}|			\\ \hline
+% 絶対A脱退率	&	$q_{x}^{A*}$		&	\verb|q_{x}^{A*}|				\\ \hline
+% 就業者数		&	$l_{x}^{aa}$		&	\verb|l_{x}^{aa}|				\\ \hline
+% 絶対就業不能率	&	$q_{x}^{(i)*}$	&	\verb|q_{x}^{(i)*}|				\\ \hline
+% \end{tabular}
+% \end{table}
+%
+% \subsubsection{装飾コマンド}
+% {\LaTeXe}には標準でさまざまな装飾系のコマンドがあります。
+% このドキュメントでは、アクチュアリー記号に必要であろうコマンドを紹介しておきます。
+%
+% \begin{center}
+% {出力例}\\
+% \begin{tabular}{lll}\hline
+% \verb|\ddot{a}|				&	引数の上にツードット記号を出力する。	&	$\ddot{a}$	\\ \hline
+% \verb|\mathring{a}|			&	引数の上にリング記号を出力する。		&	$\mathring{a}$	\\ \hline
+% \verb|\bar{a}|				&	引数の上にバー記号を出力する。			&	$\bar{a}$	\\ \hline
+% \verb|\overline{xyz}|			&	引数の上に可変長バー記号を出力する。	&	$\overline{xyz}$	\\ \hline
+% \verb|\hat{a}|				&	引数の上にハット記号を出力する。		&	$\hat{a}$		\\ \hline
+% \verb|\widehat{xyz}|			&	引数の上に可変長ハット記号を出力する。	&	$\widehat{xyz}$		\\ \hline
+% \verb|\smash{a_{\frac{1}{2}}}|&	引数の高さと深さを0ptにする。			&	$a_{\frac{1}{2}} \to a_{\smash{\frac{1}{2}}}$ \\ \hline
+% \end{tabular}
+% \end{center}
+%
+% これらの装飾コマンドを複数施すと、記号が正しい位置に付かないことがあります。
+% 例えば、\verb|\hat{\hat{A}}|と入力すると、$\hat{\hat{A}}$と出力されます。
+% これを解決するためには、amsmathパッケージを使用することをお勧めします。
+% amsmathパッケージを使用した場合、複数の装飾を施しても正しい位置に記号が出力されるようになっています。
+%
+\makeatletter
+\newlength{\w@tempLI}
+\newlength{\h@tempLI}
+\newlength{\l@tempLI}
+\newlength{\d@tempLI}
+\newlength{\t@tempLI}
+\newlength{\@tempwa}
+\newlength{\@tempwb}
+\newlength{\@tempwc}
+\newlength{\@templ}
+%
+\def\n@temp{}
+\def\opw@temp{$\scriptstyle \n@temp$}
+%
+\def\@lispan{%
+\settowidth{\w@tempLI}{\opw@temp}
+\settoheight{\h@tempLI}{\opw@temp}
+\settodepth{\d@tempLI}{\opw@temp}
+\settoheight{\t@tempLI}{\opw@temp}
+\addtolength{\t@tempLI}{\d@tempLI}
+\addtolength{\h@tempLI}{.8pt}
+\addtolength{\d@tempLI}{.5pt}
+\addtolength{\t@tempLI}{1.6pt}
+\kern .05em\llap{\rule[\h@tempLI]{\w@tempLI}{.3pt}\rule[-\d@tempLI]{.3pt}{\t@tempLI}}}
+%
+\def\@true{t}
+\def\@false{f}
+%
+% \newpage
+% \subsection{補助コマンド}
+%
+% \begin{macro}{\fracpay}
+% $ \verb|\fracpay{#1}| $
+%
+% 分割払い（\textbf{frac}tional \textbf{pay}ment）を表す記号を出力します。
+% 例えば、\verb|P^{\fracpay{12}}|と書くと、
+% $P^{\fracpay{12}}$
+% のように出力されます。
+% また、省略形である\verb|\fp|も用意しました。
+%
+% \begin{center}
+% {使用例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $P^{(k)}$					& \verb|P^{(k)}|				&
+% $P^{\fracpay{k}}$			& \verb|P^{\fracpay{k}}|		\\ \hline
+% $P^{(\infty)}$			& \verb|P^{(\infty)}|			&
+% $P^{\fracpay{\infty}}$	& \verb|P^{\fracpay{\infty}}|	\\ \hline
+% $P^{\fp{k}}$				& \verb|P^{\fp{k}}|				&
+% $P^{\fp{\infty}}$			& \verb|P^{\fp{\infty}}|		\\ \hline
+% \end{tabular}
+% \end{center}
+\newcommand{\fracpay}[1]{(\mkern-1mu#1\mkern-1mu)}
+\let\fp\fracpay
+% \end{macro}
+%
+% \begin{macro}{\step}
+% $ \verb|\step{#1}| $
+%
+% 保険期間を表す記号$\step{n}$を出力します。
+% 例えば、\verb|a_{\step{n}}|と書くと、
+% $a_{\step{n}}$
+% のように出力します。
+%
+% \begin{table}[htbp]
+% \centering
+% {使用例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $a_{\step{n}}$				& \verb|a_{\step{n}}|				&
+% $A_{x:\step{n}}$				& \verb|A_{x:\step{n}}|				\\ \hline
+% $a_{\step{n-f-t}}$			& \verb|a_{\step{n-f-t}}|			&
+% $s_{\step{\frac{1}{2}}}$		& \verb|s_{\step{\frac{1}{2}}}|		\\ \hline
+% $x^{\step{\frac{1}{1+\frac{1}{2}}}}$\rule{0pt}{4ex}				& \verb|x^{\step{\frac{1}{1+\frac{1}{2}}}}|				&
+% $a_{\step{s_{\step{n}}}}$ 	& \verb|a_{\step{s_{\step{n}}}}|	\\ \hline
+% \end{tabular}
+% \end{table}
+\newcommand{\step}[1]{
+\mathchoice
+{\@step{\displaystyle #1}}
+{\@step{\textstyle #1}}
+{\@step{\scriptstyle #1}}
+{\@step{\scriptscriptstyle #1}}
+}
+\newcommand{\@step}[1]{%
+\def\@var{\ensuremath{#1}}
+\settowidth{\@tempwa}{\@var}
+\settoheight{\@tempwb}{\@var}
+\settodepth{\@tempwc}{\@var}
+\settoheight{\@templ}{\@var}
+\addtolength{\@templ}{\@tempwc}
+\addtolength{\@tempwb}{.8pt}
+\addtolength{\@tempwc}{.5pt}
+\addtolength{\@templ}{1.6pt}
+\@var\kern .05em\llap{\rule[\@tempwb]{\@tempwa}{.3pt}\rule[-\@tempwc]{.3pt}{\@templ}}
+}
+% \end{macro}
+%
+% \begin{macro}{\overbracket}
+% $ \verb|\overbracket{#1}| $
+%
+% 引数の上部に、可変長の下向きブラケット（カギ括弧）を出力します。
+% 例：$\overbracket{A}$（\verb|\overbracket{A}|）、$\overbracket{xyzw}$（\verb|\overbracket{xyzw}|）、
+% ${\displaystyle \overbracket{ABC}}$（displaystyle）、${\textstyle \overbracket{xy}}$（textstyle）、$s_{\overbracket{abcd_{\overbracket{efgh}}}$（(script-)scriptstyle）。
+%
+% なお、この記号は縦線と横線がそれぞれ異なるパーツで描かれているため、ディスプレイ上では繋ぎ目がはみ出ているように見えますが、印刷や拡大して見てもわかるように、実際にははみ出ていません。
+\def\overbracket#1{
+\mathchoice{\@ob{\displaystyle #1}}{\@ob{\textstyle #1}}{\@ob{\scriptstyle #1}}{\@ob{\scriptscriptstyle #1}}
+}
+\def\@ob#1{
+\setbox0=\hbox{\ensuremath{#1}}
+\dimen0=1.3\ht0
+\advance \dimen0 by -1.7\p@
+\rule[\dimen0]{.3\p@}{2\p@}\rule[1.3\ht0]{\wd0}{.3\p@}\rule[\dimen0]{.3\p@}{2\p@}\llap{\box0\kern.056\p@}
+}
+% \end{macro}
+%
+% \begin{macro}{\overtortoise}
+% $ \verb|\overtortoise{#1}| $
+%
+% 引数の上部に、可変長の下向き亀甲括弧（\textbf{tortoise} shell bracket）を出力します。
+% 例：$\overtortoise{A}$（\verb|\overtortoise{A}|）、$\overtortoise{xyzw}$（\verb|\overtortoise{xyzw}|）、
+% ${\displaystyle \overtortoise{ABC}}$（displaystyle）、${\textstyle \overtortoise{xy}}$（textstyle）、$s_{\overtortoise{abcd_{\overtortoise{efgh}}}$（(script-)scriptstyle）。
+%
+% なお、この記号は縦線と横線がそれぞれ異なるパーツで描かれているため、ディスプレイ上では繋ぎ目がはみ出ているように見えますが、印刷や拡大して見てもわかるように、実際にははみ出ていません。
+\def\overtortoise#1{
+\mathchoice{\@otsb{\displaystyle #1}}{\@otsb{\textstyle #1}}{\@otsb{\scriptstyle #1}}{\@otsb{\scriptscriptstyle #1}}
+}
+\def\@otsb#1{
+\setbox0=\hbox{\ensuremath{#1}}
+\dimen0=1.3\ht0
+\advance \dimen0 by -1.7\p@
+\dimen1=\wd0
+\advance \dimen1 by -1pt
+\raisebox{\dimen0}{\@upline}\rule[1.3\ht0]{\dimen1}{.3\p@}\raisebox{\dimen0}{\@downline}\llap{\box0\kern.5pt}
+}
+\def\@upline{%
+\begin{picture}(0.895,0)
+\multiput(0,0)(.00358,.00716){250}{\rule{.21pt}{.21pt}}
+\end{picture}%
+}
+\def\@downline{%
+\begin{picture}(0.895,0)
+\put(0,1.7){\rule{.1pt}{.3pt}}\kern-.1pt
+\multiput(0,1.79)(.00358,-.00716){250}{\rule{.21pt}{.21pt}}
+\end{picture}%
+}
+% \end{macro}
+%
+% \begin{macro}{\od}
+% $ \verb|\od[#1]{#2}{#3}| $
+%
+% 常微分（\textbf{o}rdinay \textbf{d}ifferential）を表すコマンドです。
+% 2階以上の微分を表す場合は、\verb|[#1]|オプションに階数を入力することで出力できます。
+% デフォルトでは微分記号$\mathrm{d}$はローマン体となっていますが、\verb|\setDiffSymb|コマンドで変更することができます。
+% これについては後述します。
+%
+% \begin{table}[htbp]
+% \centering
+% {使用例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% \raisebox{1ex}{$\displaystyle \od{y}{x}$}\rule{0pt}{5ex}				& \verb|\od{y}{x}|			&
+% \raisebox{1ex}{$\displaystyle \od{l_{x+t}}{t}$}						& \verb|\od{l_{x+t}}{t}|	\\ \hline
+% \raisebox{1ex}{$\displaystyle \od[2]{}{x}f(x)$}\rule{0pt}{5ex}		& \verb|\od[2]{}{x}f(x)|	&
+% \raisebox{1ex}{$\displaystyle \od[n]{y}{x}$}							& \verb|\od[n]{y}{x}|		\\ \hline
+% \end{tabular}
+% \end{table}
+\def\od{\@ifnextchar[{\@od}{\@od[]}}
+\def\@od[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\@dsymb^{\@n} \@y}
+\def\@dx{\@dsymb \@x^{\@n}}
+\frac{\@dy}{\@dx}
+}
+% \end{macro}
+%
+% \newpage
+% \begin{macro}{\textod}
+% $ \verb|\textod[#1]{#2}{#3}| $
+%
+% テキスト形式の分数表現を用いた微分記号です。
+% 例えば、\verb|\textod[n]{y}{x}|と入力すると
+% $\textod[n]{y}{x}$
+% のように出力されます。
+\def\textod{\@ifnextchar[{\@textod}{\@textod[]}}
+\def\@textod[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\@dsymb^{\@n} \@y}
+\def\@dx{\@dsymb \@x^{\@n}}
+\@dy/\@dx
+}
+% \end{macro}
+%
+% \begin{macro}{\setDiffSymb}
+% $ \verb|\setDiffSymb{|\textit{typeface}\verb|}{|\textit{symbol}\verb|}| $
+%
+% このコマンドは、微分記号の書体\textit{typeface}と記号\textit{symbol}を変更することができます。
+% 書体にはromanとitalicを指定することができます。
+% 記号は任意ですが、立体（roman）またはイタリック体（italic）が用意されていない記号もありますので注意してください。
+% デフォルトでは立体のd、すなわち"$\mathrm{d}$"が設定されています。
+%
+% 入力例：
+% \begin{verbatim}
+% \[ \displaystyle
+% \od{y}{x},
+% \setDiffSymb{italic}{} \od{y}{x},
+% \setDiffSymb{roman}{D} \od{v}{t},
+% \setDiffSymb{italic}{\delta} \od{L}{t},
+% \setDiffSymb{roman}{\delta} \od{L}{t},
+% \setDiffSymb{}{\partial} \od{f}{x}, \textod{f}{x},
+% \setDiffSymb{}{} \od{y}{x} \]
+% \end{verbatim}
+%
+% 出力例：
+% \[ \displaystyle
+% \od{y}{x},
+% \setDiffSymb{italic}{} \od{y}{x},
+% \setDiffSymb{roman}{D} \od{v}{t},
+% \setDiffSymb{italic}{\delta} \od{L}{t},
+% \setDiffSymb{roman}{\delta} \od{L}{t},
+% \setDiffSymb{}{\partial} \od{f}{x}, \textod{f}{x},
+% \setDiffSymb{}{} \od{y}{x} \]
+\newcommand\@dsymb{}
+\newcommand\setDiffSymb[2]{
+\def\@arg{#2}
+\ifx\@arg\empty
+	\def\@arg{d}
+\fi
+\renewcommand\@dsymb[1][\@arg]{
+\def\@dsformat{#1}
+	\def\@italic{italic}
+	\ifx\@dsformat\@italic
+		{##1}
+	\else
+		\mathrm{##1}
+	\fi
+	}
+}
+\setDiffSymb{roman}{d}
+% \end{macro}
+%
+% \begin{macro}{\pd}
+% $ \verb|\pd[#1]{#2}{#3}| $
+%
+% 偏微分（\textbf{p}artial \textbf{d}ifferential）を表すコマンドです。
+% 2階以上の微分を表す場合は、\verb|[#1]|オプションに階数を入力することで出力できます。
+% 例えば、displaystyle中で\verb|\pd[n]{y}{x}|と入力すると
+% $\displaystyle \pd[n]{y}{x}$
+% のように出力されます。
+\def\pd{\@ifnextchar[{\@pd}{\@pd[]}}
+\def\@pd[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\partial^{\@n} \@y}
+\def\@dx{\partial \@x^{\@n}}
+\frac{\@dy}{\@dx}
+}
+% \end{macro}
+%
+% \begin{macro}{\pdd}
+% $ \verb|\pdd[#1]{#2}{#3}[#4]{#5}[#6]| $
+%
+% 2変数偏微分を表します。
+% 例えば、displaystyle中で\verb|\pdd[n+m]{f}{x}[n]{y}[m]|と入力すると
+% $\displaystyle \pdd[n+m]{f}{x}[n]{y}[m]$
+% のように出力されます。
+\def\pdd{\@ifnextchar[{\@pdd}{\@pdd[]}}
+\def\@pdd[#1]#2#3{\@ifnextchar[{\@@pdd[#1]#2#3}{\@@pdd[#1]#2#3[]}}
+\def\@@pdd[#1]#2#3[#4]#5{\@ifnextchar[{\@@@pdd[#1]#2#3[#4]#5}{\@@@pdd[#1]#2#3[#4]#5[]}}
+\def\@@@pdd[#1]#2#3[#4]#5[#6]{
+\def\@n{#1}
+\def\@f{#2}
+\def\@x{#3}
+\def\@a{#4}
+\def\@y{#5}
+\def\@b{#6}
+\def\@df{\partial^{\@n} \@f}
+\def\@dx{\partial \@x^{\@a}}
+\def\@dy{\partial \@y^{\@b}}
+\frac{\@df}{\@dx \@dy}
+}
+% \end{macro}
+%
+% \begin{macro}{\textpd}
+% $ \verb|\textpd[#1]{#2}{#3}| $
+%
+% テキスト形式の分数表現を用いた微分記号です。
+% 例えば、\verb|\textpd[n]{y}{x}|と入力すると
+% $\textpd[n]{y}{x}$
+% のように出力されます。
+\def\textpd{\@ifnextchar[{\@textpd}{\@textpd[]}}
+\def\@textpd[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\partial^{\@n} \@y}
+\def\@dx{\partial \@x^{\@n}}
+\@dy/\@dx
+}
+% \end{macro}
+%
+% \newpage
+% \subsection{アクチュアリー記号}
+% \begin{macro}{\lisymb}
+% $ \verb|\lisymb[#1](#2)<#3>{#4}[#5](#6){#7}{#8}| $
+%
+% アクチュアリー記号（\textbf{li}fe actuarial \textbf{symb}ol）を出力する汎用的なコマンドです。
+% 各引数やオプションの詳細は以下の表の通りです。
+%
+% \begin{table}[htbp]
+% \centering
+% \label{tbl:lisymb}
+% {引数詳細}\\
+% {\small
+% \begin{tabular}{cl}\hline
+% 引数 & 詳細 \\ \hline \hline
+% \verb|#1|	& 引数として\verb|mod|を指定すると、保険金即時払い（payable at the \textbf{m}oment \textbf{o}f the \textbf{d}eath）を\\
+%			& 表すためのバーを出力します。また、$*$を指定すると、営業保険料を表す記号を出力します。 \\
+%			& 例：\verb|\lisymb[mod]{P}{}{}| $\longrightarrow $ $\lisymb[mod]{P}{}{}$、\verb|\lisymb[*]{P}{}{}| $\longrightarrow $ $\lisymb[*]{P}{}{}$		\\
+%			& これらのオプションをカンマで区切って同時に指定することもできます。\\
+%			& 例：\verb|\lisymb[mod,*]{P}{}{}| $\longrightarrow $ $\lisymb[mod,*]{P}{}{}$ \\ \hline
+% \verb|#2|	& 引数を左下添え字として出力します。
+%			  例：\verb|\lisymb(t){V}{}{}| $\longrightarrow $ $\lisymb(t){V}{}{}$ \\ \hline
+% \verb|#3|	& 引数を左上添え字として出力します。
+%			  例：\verb|\lisymb<m>{V}{}{}| $\longrightarrow $ $\lisymb<m>{V}{}{}$ \\ \hline
+% \verb|#4|	& 保険種類などを表すための文字を指定します。
+%			  例：\verb|\lisymb{A}{}{}| $\longrightarrow $ $\lisymb{A}{}{}$ \\ \hline
+% \verb|#5|	& 引数を第1右上添え字として出力し、ブラケット\verb|[]|で囲みます。 \\
+%			& 例：\verb|\lisymb{V}[A]{}{}| $\longrightarrow $ $\lisymb{V}[A]{}{}$ \\ \hline
+% \verb|#6|	& 引数を第2右上添え字として出力し、パーレーン\verb|()|で囲みます。 \\
+%			& 例：\verb|\lisymb{P}(k){}{}| $\longrightarrow $ $\lisymb{P}(k){}{}$ \\ \hline
+% \verb|#7|	& 引数を第1右下添え字として出力します。通常、保険加入時の年齢を表します。 \\
+%			& null値でも構いません。 \\
+%			& 例：\verb|\lisymb{A}{x}{}| $\longrightarrow $ $\lisymb{A}{x}{}$ \\ \hline
+% \verb|#8|	& 引数を第2右下添え字として出力します。その際、保険期間を表す記号$\step{\rule{0pt}{4pt}\rule{6pt}{0pt}}$も出力されます。\\
+%			& null値でも構いません。その場合、記号も含め引数\verb|#8|は出力されません。 \\
+%			& 例：\verb|\lisymb{a}{}{n}| $\longrightarrow $ $\lisymb{a}{}{n}$ \\ \hline
+% \end{tabular}}
+% \end{table}
+%
+% \begin{table}[htbp]
+% {\centering
+% {出力例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $\lisymb{a}{x}{n}$					& \verb|\lisymb{a}{x}{n}| &
+% $\lisymb{a}{}{n}$						& \verb|\lisymb{a}{}{n}| \\ \hline
+% $\lisymb{a}{x}{}$						& \verb|\lisymb{a}{x}{}| &
+% $\lisymb{A}(k){x}{n}$					& \verb|\lisymb{A}(k){x}{n}| \\ \hline
+% $\lisymb{s}(k){}{n+f}$				& \verb|\lisymb{s}(k){}{n+f}| &
+% $\lisymb{P}(\infty){x}{n}$			& \verb|\lisymb{P}(\infty){x}{n}| \\ \hline
+% $\lisymb[mod]{P}{x}{n}$				& \verb|\lisymb[mod]{P}{x}{n}| &
+% $\lisymb[mod,*]{P}{x}{n}$				& \verb|\lisymb[mod,*]{P}{x}{n}| \\ \hline
+% $\lisymb(m){P}{x}{n}$					& \verb|\lisymb(m){P}{x}{n}| &
+% $\lisymb(t)<m>{V}{x}{n}$				& \verb|\lisymb(t)<m>{V}{x}{n}| \\ \hline
+% $\lisymb(t){V}[hz]{x}{n}$				& \verb|\lisymb(t){V}[hz]{x}{n}| &
+% $\lisymb(t){V}[hz](k){x}{n}$			& \verb|\lisymb(t){V}[hz](k){x}{n}| \\ \hline
+% \phantom{$\lisymb[mod,*](t)<m>{V}[hz](k){x}{n}$} \\[-20pt]
+% \end{tabular}}
+% \begin{tabular}{cl}
+% $\lisymb[mod,*](t)<m>{V}[hz](k){x}{n}$	& \verb|\lisymb[mod,*](t)<m>{V}[hz](k){x}{n}| \\ \hline
+% \end{tabular}
+% \end{table}
+\def\lisymb{\@ifnextchar[{\lisymb@}{\lisymb@[]}}
+\def\lisymb@[#1]{\@ifnextchar({\@lisymb@[#1]}{\@lisymb@[#1]()}}
+\def\@lisymb@[#1](#2){\@ifnextchar<{\@@lisymb@[#1](#2)}{\@@lisymb@[#1](#2)<>}}
+\def\@@lisymb@[#1](#2)<#3>#4{\@ifnextchar[{\@@lisymb[#1](#2)<#3>#4}{\@@lisymb[#1](#2)<#3>{#4}[]}}
+\def\@@lisymb[#1](#2)<#3>#4[#5]{\@ifnextchar({\@lisymb[#1](#2)<#3>#4[#5]}{\@lisymb[#1](#2)<#3>{#4}[#5]()}}
+\def\@lisymb[#1](#2)<#3>#4[#5](#6)#7#8{%
+\def\p@temp{#1}
+\def\t@temp{#2}
+\def\m@temp{#3}
+\def\V@temp{#4}
+\def\z@temp{#5}
+\def\k@temp{#6}
+\def\x@temp{#7}
+\def\n@temp{#8}
+\def\mod@tmp{mod}
+\def\grs@tmp{*}
+\def\opw@temp{$\scriptstyle \n@temp$}
+\dimen0=0pt
+\dimen1=1pt
+\def\@sort{\V@temp}
+\@for\TmpStr:=\p@temp\do{
+	\ifx\TmpStr\mod@tmp
+		\def\@sort{\bar{\V@temp}}
+	\else
+		\ifx\TmpStr\grs@tmp
+			\dimen0=\dimen1
+		\fi
+	\fi
+}
+\settoheight{\dimen2}{$\scriptstyle \x@temp:\n@temp\@lispan$}
+\settodepth{\dimen3}{$\scriptstyle \x@temp:\n@temp\@lispan$}
+\settodepth{\dimen4}{${\scriptscriptstyle [\z@temp]} {\scriptstyle \fracpay{\k@temp}}$}
+\settoheight{\dimen5}{${\scriptscriptstyle [\z@temp]} {\scriptstyle \fracpay{\k@temp}}$}
+\dimen6=7.5pt
+\dimen7=4.5pt
+\ifnum\dimen2>\dimen6
+	\addtolength{\dimen2}{-.5ex}
+\else
+	\ifnum\dimen2>\dimen7
+		\addtolength{\dimen4}{.2ex}
+	\fi
+	\dimen2=4.11389pt
+\fi
+\ifx\x@temp\empty
+	\ifx\n@temp\empty
+		\def\sort@{\@sort}
+	\else
+		\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \n@temp\@lispan}$}}}
+	\fi
+\else
+	\ifx\n@temp\empty
+		\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \x@temp}$}}}
+	\else
+		\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \x@temp:\n@temp\@lispan}$}}}
+	\fi
+\fi
+\ifnum\dimen0=\dimen1
+	\ifx\z@temp\empty
+		\ifx\k@temp\empty
+			\def\sort@@{\sort@^{*}}
+		\else
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptstyle \fracpay{\k@temp}*}$}}}
+		\fi
+	\else
+		\def\z@@temp{[\kern-.05em\expandafter\@tfor\expandafter\TempStr\expandafter:\expandafter=\z@temp\do{\TempStr\kern-.1em}\kern.1em]}
+		\ifx\k@temp\empty
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle *}$}}}
+		\else
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle \fracpay{\k@temp}*}$}}}
+		\fi
+	\fi
+\else
+	\ifx\z@temp\empty
+		\ifx\k@temp\empty
+			\def\sort@@{\sort@}
+		\else
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptstyle \fracpay{\k@temp}}$}}}
+		\fi
+	\else
+		\def\z@@temp{[\expandafter\@tfor\expandafter\TempStr\expandafter:\expandafter=\z@temp\do{\TempStr\kern-.1em}\kern.05em]}
+		\ifx\k@temp\empty
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}$}}}
+		\else
+			\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle \fracpay{\k@temp}}$}}}
+		\fi
+	\fi
+\fi
+\ifx\t@temp\empty
+	\ifx\m@temp\empty
+		\sort@@
+	\else
+		{}^{\m@temp}\sort@@
+	\fi
+\else
+	\ifx\m@temp\empty
+		\ifx\x@temp\empty
+			\ifx\n@temp\empty
+				{}_{\t@temp}\sort@@
+			\else
+				{}_{\t@temp}^{}\sort@@
+			\fi
+		\else
+			{}_{\t@temp}^{}\sort@@
+		\fi
+	\else
+		\settowidth{\@tempwa}{${}^{\m@temp}$}
+		\settowidth{\@tempwb}{${}^{m.}$}
+		\settowidth{\@tempwc}{${}^{\t@temp}$}
+		\settowidth{\@templ}{${}_{t.}$}
+		\ifnum\@tempwa>\@tempwc
+			\dimen6=\@tempwa
+		\else
+			\dimen6=\@tempwc
+		\fi
+		\ifnum\@tempwa>\@tempwb
+			\makebox[\dimen6][r]{${}_{\t@temp}^{}$\raisebox{.2ex}{\makebox[0pt][r]{${}^{\m@temp}$}}}\sort@@
+		\else
+			\ifnum\@tempwc>\@templ
+				\makebox[\dimen6][r]{${}_{\t@temp}^{}$\raisebox{.2ex}{\makebox[0pt][r]{${}^{\m@temp}$}}}\sort@@
+			\else
+				\makebox[\dimen6][r]{${}_{\t@temp}^{}$\llap{\raisebox{.2ex}{${}^{\m@temp}$}}}\sort@@
+			\fi
+		\fi
+	\fi
+\fi
+}
+% \end{macro}
+%
+% \newpage
+% \begin{macro}{\defer}
+% $ \verb|\defer{#1}{#2}| $
+%
+% 据え置き（\textbf{defer}red）を表す記号を出力します。
+% 例えば、\verb|\defer{f}{}\lisymb{A}{x}{n}|と書けば、$\defer{f}{}\lisymb{A}{x}{n}$と出力されます。
+% また、第2引数を用いれば、\verb|\defer{f}{n}q_{x}|と書くことで、$\defer{f}{n}q_{x}$と出力されます。
+\def\defer#1#2{
+\def\f@temp{#1}
+\ifx\f@temp\empty
+{}_{#2}
+\else
+{}_{#1|#2}
+\fi}
+% \end{macro}
+%
+% \begin{macro}{\annuity}
+% $ \verb|\annuity[#1](#2){#3}(#4){#5}{#6}| $
+%
+% このコマンドは確定年金（\textbf{annuity} certain）または生命年金（life \textbf{annuity}）の現価と終価を表す記号を出力します。
+% この使い方は\verb|\lisymb|とほとんど同じです。
+% なお、期末払い（\textbf{o}rdinary）を表したい場合は\verb|[#1]|オプションに\verb|o|を指定します。
+% デフォルトであるオプション\verb|d|を指定することで、期始払い（\textbf{d}ue）を陽に示すこともできます。
+% 連続払いを表すためには、\verb|[#1]|オプションに\verb|mod|を、
+% または\verb|(#4)|オプションに\verb|inf|（\textbf{inf}ty, \textbf{inf}inite）を指定してください。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $\annuity{s}{}{n}$	& \verb|\annuity{s}{}{n}| &
+% $\annuity{a}{x}{}$	& \verb|\annuity{a}{x}{}| \\ \hline
+% $\annuity[o]{a}{x}{n}$	& \verb|\annuity[o]{a}{x}{n}| &
+% $\annuity[d]{a}{x}{n}$	& \verb|\annuity[d]{a}{x}{n}| \\ \hline
+% $\annuity[o]{a}(k){x}{n}$	& \verb|\annuity[o]{a}(k){x}{n}| &
+% $\annuity(f){s}{x}{n}$	& \verb|\annuity(f){s}{x}{n}| \\ \hline
+% $\annuity{a}(\infty){x}{n}$	& \verb|\annuity{a}(\infty){x}{n}| &
+% $\annuity{a}(inf){x}{n}$	& \verb|\annuity{a}(inf){x}{n}| \\ \hline
+% $\annuity[mod](f){a}(inf){x}{n}$	& \verb|\annuity[mod](f){a}(inf){x}{n}| &
+% $\annuity[mod]{a}{x}{n}$	& \verb|\annuity[mod]{a}{x}{n}| \\ \hline
+% $\annuity{a}(k){}{n-\frac{1}{k}}$	& \verb|\annuity{a}(k){}{n-\frac{1}{k}}| & & \\ \hline
+% $a_{\step{n-\frac{1}{k}}}^{\fracpay{k}}$	& \verb|a_{\step{n-\frac{1}{k}}}^{\fracpay{k}}| & & \\ \hline
+% \end{tabular}
+% \end{table}
+\def\annuity{\@ifnextchar[{\annuity@}{\annuity@[]}}
+\def\annuity@[#1]{\@ifnextchar({\@annuity@[#1]}{\@annuity@[#1]()}}
+\def\@annuity@[#1](#2)#3{\@ifnextchar({\@annuity[#1](#2)#3}{\@annuity[#1](#2)#3()}}
+\def\@annuity[#1](#2)#3(#4)#5#6{
+\def\@tempopt{#1}
+\def\@tempf{#2}
+\def\@tempa{#3}
+\def\@tempk{#4}
+\def\@tempx{#5}
+\def\@tempn{#6}
+\def\@tempinf{inf}
+\def\@tempo{o}
+\def\@tempmod{mod}
+\ifx\@tempk\@tempinf
+	\def\@temps{\bar{\@tempa}}
+\else
+	\ifx\@tempopt\@tempo
+		\def\@temps{\@tempa}
+	\else
+		\ifx\@tempopt\@tempmod
+			\def\@temps{\bar{\@tempa}}
+		\else
+			\def\@temps{\ddot{\@tempa}}
+		\fi
+	\fi
+\fi
+\ifx\@tempk\@tempinf
+	\ifx\@tempf\empty
+		\ifx\@tempx\empty
+			\ifx\@tempn\empty
+				\lisymb{\@temps}{}{}
+			\else
+				\lisymb{\@temps}{}{\@tempn}
+			\fi
+		\else
+			\ifx\@tempn\empty
+				\lisymb{\@temps}{\@tempx}{}
+			\else
+				\lisymb{\@temps}{\@tempx}{\@tempn}
+			\fi
+		\fi
+	\else
+		\ifx\@tempx\empty
+			\ifx\@tempn\empty
+				\lisymb(\@tempf|){\@temps}{}{}
+			\else
+				\lisymb(\@tempf|){\@temps}{}{\@tempn}
+			\fi
+		\else
+			\ifx\@tempn\empty
+				\lisymb(\@tempf|){\@temps}{\@tempx}{}
+			\else
+				\lisymb(\@tempf|){\@temps}{\@tempx}{\@tempn}
+			\fi
+		\fi
+	\fi
+\else
+	\ifx\@tempk\empty
+		\ifx\@tempf\empty
+			\ifx\@tempx\empty
+				\ifx\@tempn\empty
+					\lisymb{\@temps}{}{}
+				\else
+					\lisymb{\@temps}{}{\@tempn}
+				\fi
+			\else
+				\ifx\@tempn\empty
+					\lisymb{\@temps}{\@tempx}{}
+				\else
+					\lisymb{\@temps}{\@tempx}{\@tempn}
+				\fi
+			\fi
+		\else
+			\ifx\@tempx\empty
+				\ifx\@tempn\empty
+					\lisymb(\@tempf|){\@temps}{}{}
+				\else
+					\lisymb(\@tempf|){\@temps}{}{\@tempn}
+				\fi
+			\else
+				\ifx\@tempn\empty
+					\lisymb(\@tempf|){\@temps}{\@tempx}{}
+				\else
+					\lisymb(\@tempf|){\@temps}{\@tempx}{\@tempn}
+				\fi
+			\fi
+		\fi
+	\else
+		\ifx\@tempf\empty
+			\ifx\@tempx\empty
+				\ifx\@tempn\empty
+					\lisymb{\@temps}(\@tempk){}{}
+				\else
+					\lisymb{\@temps}(\@tempk){}{\@tempn}
+				\fi
+			\else
+				\ifx\@tempn\empty
+					\lisymb{\@temps}(\@tempk){\@tempx}{}
+				\else
+					\lisymb{\@temps}(\@tempk){\@tempx}{\@tempn}
+				\fi
+			\fi
+		\else
+			\ifx\@tempx\empty
+				\ifx\@tempn\empty
+					\lisymb(\@tempf|){\@temps}(\@tempk){}{}
+				\else
+					\lisymb(\@tempf|){\@temps}(\@tempk){}{\@tempn}
+				\fi
+			\else
+				\ifx\@tempn\empty
+					\lisymb(\@tempf|){\@temps}(\@tempk){\@tempx}{}
+				\else
+					\lisymb(\@tempf|){\@temps}(\@tempk){\@tempx}{\@tempn}
+				\fi
+			\fi
+		\fi
+	\fi
+\fi
+}
+% \end{macro}
+%
+% \begin{macro}{\pureendow}
+% $ \verb|\pureendow{#1}(#2){#3}{#4}| $
+%
+% 純粋生存保険（\textbf{pure endow}ment）を表す記号を出力します。
+% 通常、第3、4引数がnullの純粋生存保険は考えられませんが、
+% このコマンドではそのような場合でも出力されます。（例参照）
+% また、分割払いの場合、例のように$\smash{\stackrel{1}{\step{n}}}$よりも後ろにそれを表す記号が出力されてしまいます。
+% この点は好き嫌いがあると思いますので、今後改良していきたいと考えています。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl}\hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $\pureendow{A}{x}{n}$			& \verb|\pureendow{A}{x}{n}| &
+% $\pureendow{P}(k){x}{n}$		& \verb|\pureendow{P}(k){x}{n}| \\ \hline
+% $\pureendow{A}{}{n}$			& \verb|\pureendow{A}{}{n}| &
+% $\pureendow{P}{x}{}$		& \verb|\pureendow{P}{x}{}| \\ \hline
+% \end{tabular}
+% \end{table}
+\def\pureendow#1{\@ifnextchar({\@pureendow#1}{\@pureendow#1()}}
+\def\@pureendow#1(#2)#3#4{
+\def\k@tmp{#2}
+\def\join@tmp{#3}
+\def\whole@tmp{#4}
+\settowidth{\@tempwa}{$\scriptstyle #4$}
+\settoheight{\dimen0}{$\scriptstyle #3:\step{#4}$}
+\dimen1=5.6pt
+\dimen2=5.4pt
+\ifnum\dimen0>\dimen1
+	\@tempwb=.4ex
+\else
+	\ifnum\dimen0>\dimen2
+		\@tempwb=.3ex
+	\else
+		\@tempwb=.2ex
+	\fi
+\fi
+\def\@out{\lisymb{#1}{#3}{#4}\kern-\@tempwa\makebox[\@tempwa]{${}^{\raisebox{\@tempwb}{$\scriptscriptstyle 1$}}$}}
+\ifx\k@tmp\empty
+	\@out
+\else
+	\@out{}^{\fracpay{\k@tmp}}
+\fi
+}
+% \end{macro}
+%
+% \begin{macro}{\termins}
+% $ \verb|\termins[#1]{#2}(#3)[#4]{#5}{#6}| $
+%
+% 定期保険（\textbf{term ins}urance）を表す記号を出力します。
+% 引数\verb|#6|を省略した場合、終身保険の記号を出力します。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl} \hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $\termins{P}{x}{n}$				& \verb|\termins{P}{x}{n}| &
+% $\termins{P}(k){x}{n}$			& \verb|\termins{P}(k){x}{n}| \\ \hline
+% $\termins[mod]{P}{x}{n}$			& \verb|\termins[mod]{P}{x}{n}| &
+% $\termins{P}[*]{x}{n}$			& \verb|\termins{P}[*]{x}{n}| \\ \hline
+% $\termins[mod]{P}(\infty){x}{n}$	& \verb|\termins[mod]{P}(\infty){x}{n}| &
+% $\termins{P}(k)[*]{x}{n}$			& \verb|\termins{P}(k)[*]{x}{n}| \\ \hline
+% $\termins{P}{}{n}$				& \verb|\termins{P}{}{n}| &
+% $\termins{P}{x}{}$				& \verb|\termins{P}{x}{}| \\ \hline
+% $\termins{P}(k){x}{}$				& \verb|\termins{P}(k){x}{}| &
+% $\termins{P}[*]{x}{}$				& \verb|\termins{P}[*]{x}{}| \\ \hline
+% \end{tabular}
+% \end{table}
+\def\termins{\@ifnextchar[{\@@termins}{\@@termins[]}}
+\def\@@termins[#1]#2{\@ifnextchar({\@@termins@[#1]{#2}}{\@@termins@[#1]{#2}()}}
+\def\@@termins@[#1]#2(#3){\@ifnextchar[{\@termins[#1]{#2}(#3)}{\@termins[#1]{#2}(#3)[]}}
+\def\@termins[#1]#2(#3)[#4]#5#6{
+\def\@tempopt{#1}
+\def\@temps{#2{}}
+\def\@tempk{#3}
+\def\@tempg{#4}
+\def\@tempx{#5}
+\def\@tempn{#6}
+\def\@tempmod{mod}
+\def\@tempgrs{*}
+\ifx\@tempopt\@tempmod
+	\ifx\@tempx\empty
+		\ifx\@tempn\empty
+			\def\@tempS{\lisymb[mod]{\@temps}{}{}}
+		\else
+			\def\@tempS{\lisymb[mod]{\@temps}{}{\@tempn}}
+		\fi
+	\else
+		\ifx\@tempn\empty
+			\def\@tempS{\lisymb[mod]{\@temps}{\@tempx}{}}
+		\else
+			\def\@tempS{\lisymb[mod]{\@temps}{\@tempx}{\@tempn}}
+		\fi
+	\fi
+\else
+	\ifx\@tempn\empty
+		\ifx\@tempx\empty
+			\def\@tempS{\lisymb{\@temps}{}{}}
+		\else
+			\def\@tempS{\lisymb{\@temps}{\@tempx}{}}
+		\fi
+	\else
+		\ifx\@tempx\empty
+			\def\@tempS{\lisymb{\@temps}{}{\@tempn}}
+		\else
+			\def\@tempS{\lisymb{\@temps}{\@tempx}{\@tempn}}
+		\fi
+	\fi
+\fi
+\settowidth{\@tempwa}{$\scriptstyle \@tempx$}
+\settowidth{\@tempwb}{$\scriptstyle :\@tempn$}
+\settoheight{\dimen8}{$\scriptstyle \@tempx:\step{\@tempn}$}
+\dimen5=5.5pt
+\dimen7=7pt
+\ifnum\dimen8>\dimen7
+	\@tempwc=.5ex
+	\@templ=.9ex
+\else
+	\ifnum\dimen8>\dimen5
+		\@tempwc=.3ex
+		\@templ=.6ex
+	\else
+		\@tempwc=.1ex
+		\@templ=.4ex
+	\fi
+\fi
+\ifx\@tempg\@tempgrs
+	\ifx\@tempn\empty
+		\ifx\@tempx\empty
+			\ifx\@tempk\empty
+				\@tempS{}^{*}
+			\else
+				\@tempS{}^{\kpay{\@tempk}*}
+			\fi
+		\else
+			\ifx\@tempk\empty
+				\@tempS^{*}
+			\else
+				\@tempS^{\scriptstyle \fracpay{\@tempk}*}
+			\fi
+		\fi
+	\else
+		\ifx\@tempx\empty
+			\settowidth{\@tempwa}{${}^{\scriptscriptstyle 1}$}
+			\ifx\@tempk\empty
+				\@tempS\kern-\@tempwb\makebox[\@tempwa]{${}^{*}$}\kern\@tempwb
+			\else
+				\@tempS\kern-\@tempwb{}^{\kern.5em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}*}$}}}
+			\fi
+		\else
+			\ifx\@tempk\empty
+				\@tempS\kern-\@tempwa\kern-\@tempwb\makebox[\@tempwa]{${}^{\kern.5em\raisebox{\@tempwc}{$\scriptscriptstyle 1$}\kern.1em\raisebox{.2ex}{$\scriptstyle *$}}$}\kern\@tempwb
+			\else
+				\@tempS\kern-\@tempwa\kern-\@tempwb{}^{\kern-.1em\raisebox{\@tempwc}{\makebox[\@tempwa]{${\scriptscriptstyle 1}$}}\raisebox{\@templ}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}\kern.1em\raisebox{.2ex}{$\scriptstyle *$}}
+			\fi
+		\fi
+	\fi
+\else
+	\ifx\@tempn\empty
+		\ifx\@tempx\empty
+			\ifx\@tempk\empty
+				\@tempS{}^{\scriptscriptstyle 1}
+			\else
+				\@tempS{}^{{\scriptscriptstyle 1}\raisebox{.4ex}{${\scriptstyle \fracpay{\@tempk}}$}}
+			\fi
+		\else
+			\ifx\@tempk\empty
+				\@tempS
+			\else
+				\settowidth{\@tempwb}{$\scriptstyle :n$}
+				\@tempS^{\scriptstyle \fracpay{\@tempk}}
+			\fi
+		\fi
+	\else
+		\ifx\@tempx\empty
+			\settowidth{\@tempwa}{${}^{\scriptscriptstyle 1}$}
+			\ifx\@tempk\empty
+				\@tempS\kern-\@tempwb\makebox[\@tempwa]{${}^{\scriptscriptstyle 1}$}\kern\@tempwb
+			\else
+				\@tempS\kern-\@tempwb{}^{\makebox[\@tempwa]{${\scriptscriptstyle 1}$}\kern.1em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}}
+			\fi
+		\else
+			\ifx\@tempk\empty
+				\@tempS\kern-\@tempwa\kern-\@tempwb\kern-.05em\makebox[\@tempwa]{${}^{\scriptscriptstyle 1}$}\kern.05em\kern\@tempwb
+			\else
+				\@tempS\kern-\@tempwa\kern-\@tempwb{}^{\kern-.1em\makebox[\@tempwa]{${\scriptscriptstyle 1}$}\kern.2em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}}
+			\fi
+		\fi
+	\fi
+\fi
+}
+% \end{macro}
+%
+% \newpage
+% \begin{macro}{\endow}
+% $ \verb|\endow[#1](#2){#3}(#4)[#5]{#6}{#7}| $
+%
+% 養老保険（\textbf{endow}ment）を表す記号を出力します。
+% 引数\verb|#6|を省略した場合、元金償還保険の記号を出力します。
+% 引数\verb|#7|を省略した場合、終身保険の記号を出力します。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl} \hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $\endow{P}{x}{n}$				& \verb|\endow{P}{x}{n}| &
+% $\endow{P}(k){x}{n}$			& \verb|\endow{P}(k){x}{n}| \\ \hline
+% $\endow[mod]{P}{x}{n}$		& \verb|\endow[mod]{P}{x}{n}| &
+% $\endow{P}[*]{x}{n}$			& \verb|\endow{P}[*]{x}{n}| \\ \hline
+% $\endow[mod]{V}(k){x}{n}$		& \verb|\endow[mod]{V}(k){x}{n}| &
+% $\endow[mod]{P}(k)[*]{x}{n}$			& \verb|\endow[mod]{P}(k)[*]{x}{n}| \\ \hline
+% $\endow{P}{x}{}$				& \verb|\endow{P}{x}{}| &
+% $\endow{P}{}{n}$			& \verb|\endow{P}{}{n}| \\ \hline
+% \end{tabular}
+% \end{table}
+\def\endow{\@ifnextchar[{\endow@}{\endow@[]}}
+\def\endow@[#1]{\@ifnextchar({\@endow@[#1]}{\@endow@[#1]()}}
+\def\@endow@[#1](#2)#3{\@ifnextchar({\@@endow[#1](#2){#3}}{\@@endow[#1](#2){#3}()}}
+\def\@@endow[#1](#2)#3(#4){\@ifnextchar[{\@endow[#1](#2){#3}(#4)}{\@endow[#1](#2){#3}(#4)[]}}
+\def\@endow[#1](#2)#3(#4)[#5]#6#7{\lisymb[#1,#5](#2){#3}(#4){#6}{#7}}
+% \end{macro}
+%
+% \begin{macro}{\joint}
+% $ \verb|\joint[#1]{#2}(#3)[#4]| $
+%
+% 連合生命（\textbf{joint} lives）において、加入者集合を表す記号を出力します。
+% \verb|[#1]|オプションへの \verb|-| 指定は単生命などを表すオーバーラインを出力し、
+% \verb|^|を指定した場合は共存を意味する下向き亀甲括弧（\verb|\overtortoise{#1}|）を出力します。
+%
+% このコマンドによる出力は、デフォルトでは高さと深さが0になっています。
+% この設定を解除するためには、\verb|[#1]|オプションで\verb|ns|（\textbf{n}ot \textbf{s}mash）を指定してください。
+% 例えば、$q_{\joint[-]{xyz}[r]}^{A}$（\verb|q_{\joint[-]{xyz}[r]}^{A}|）は、
+% \verb|ns|指定することで$q_{\joint[ns,-]{xyz}[r]}^{A}$（\verb|q_{\joint[ns,-]{xyz}[r]}^{A}|）になります。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl} \hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $p_{\joint{xy}}$					& \verb|p_{\joint{xy}}| &
+% $p_{\joint{xyz}(m)}$				& \verb|p_{\joint{xyz}(m)}| \\ \hline
+% $p_{\joint[-]{xy}(m)}$			& \verb|p_{\joint[-]{xy}(m)}| &
+% $p_{\joint[-]{xy}(m)[r]}$			& \verb|p_{\joint[-]{xy}(m)[r]}| \\ \hline
+% $A_{\joint[^]{xy}}$				& \verb|A_{\joint[^]{xy}}| &
+% $\endow{A}{\joint[^]{xy}[1]\vert z}{n}$		& \verb/\endow{A}{\joint[^]{xy}[1]|z}{n}/ \\ \hline
+% $p_{\joint{xy}(m)[{[r]}]}$			& \verb|p_{\joint{xy}(m)[{[r]}]}| &
+% $p_{\joint[^]{xy}(m)[r]}$			& \verb|p_{\joint[^]{xy}(m)[r]}| \\ \hline
+% $p_{\joint[ns,-]{xy}(m)[r]}$		& \verb|p_{\joint[ns,-]{xy}(m)[r]}| &
+% $p_{\joint[ns,^]{xy}(m)[r]}$		& \verb|p_{\joint[ns,^]{xy}(m)[r]}| \\ \hline
+% \end{tabular}
+% \end{table}
+\def\joint{\@ifnextchar[{\@joint}{\@joint[]}}
+\def\@joint[#1]#2{\@ifnextchar({\@@joint[#1]{#2}}{\@@joint[#1]{#2}()}}
+\def\@@joint[#1]#2(#3){\@ifnextchar[{\joint@[#1]{#2}(#3)}{\joint@[#1]{#2}(#3)[]}}
+\def\joint@[#1]#2(#3)[#4]{
+\def\@tempol{#1}
+\def\@tempxy{#2}
+\def\@tempm{#3}
+\def\@tempr{#4}
+\def\@overline{-}
+\let\@olflag=\empty
+\def\@overtsb{^}
+\let\@obflag=\empty
+\def\@nsmash{ns}
+\let\@nsmashflag=\empty
+\def\m@thchoiced{\mathchoice{\displaystyle}{\scriptstyle}{\scriptscriptstyle}{\scriptscriptstyle}}
+\@for\TmpStr:=\@tempol\do{
+	\ifx\TmpStr\@overline
+		\let\@olflag=\@true
+	\else
+		\ifx\TmpStr\@overtsb
+			\let\@obflag=\@true
+		\else
+			\ifx\TmpStr\@nsmash
+				\let\@nsmashflag=\@true
+			\fi
+		\fi
+	\fi
+}
+\ifx\@tempm\empty
+	\def\@output{\@tempxy}
+\else
+	\def\@output{\@tempxy \cdots {\m@thchoiced (}\@tempm{\m@thchoiced )}}
+\fi
+\ifx\@olflag\@true
+	\def\@@output{\overline{\@output}}
+\else
+	\ifx\@obflag\@true
+		\def\@@output{\kern.1em\overtortoise{\@output}\kern.1em}
+	\else
+		\def\@@output{\@output}
+	\fi
+\fi
+\ifx\@tempr\empty
+	\@@output
+\else
+	\ifx\@nsmashflag\@true
+		\stackrel{\@tempr}{\@@output}
+	\else
+		\smash{\stackrel{\@tempr}{\@@output}}
+	\fi
+\fi
+}
+% \end{macro}
+%
+% \begin{macro}{\aalign}
+% $ \verb|\aalign[#1]{#2}{#3}| $
+%
+% このコマンドは、引数\verb|#2|の上（\textbf{a}bove）に引数\verb|#3|を出力します。
+%
+% このコマンドを使用すると、$q_{x}$（\verb|q_{x}|）と比べ添え字の高さが大きくなるため、$x$などの文字は下に付き過ぎな印象を受けます。
+% これを避けたい場合は、\verb|[#1]|オプションで\verb|s|を指定してください。
+% \verb|\smash|が実行され、高さと深さが0になります。
+% 例：$q_{\aalign{x}{1}} \to q_{\aalign[s]{x}{1}}$（\verb|q_{\aalign{x}{1}}| $\to$ \verb|q_{\aalign[s]{x}{1}}|）。
+%
+% ついでに、既に定義されているコマンドと比較してみます。
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{lll} \hline
+% \verb|\mathop{#1}|				& $\mathop{x}\limits^{1}$		& \verb|$\mathop{x}\limits^{1}$| \\ \hline
+% \verb|\stackrel{#1}{#2}|			& $\stackrel{1}{x}$				& \verb|$\stackrel{1}{x}$| \\ \hline
+% \verb|\atop|						& ${x\atop 1}$					& \verb|${x\atop 1}$|	\\ \hline
+% \verb|\oalign{{#1}\crcr{#2}}|		& \oalign{{$1$}\crcr{$x$}}		& \verb|\oalign{{$1$}\crcr{$x$}}| \\ \hline
+% \verb|\aalign{#1}{#2}|			& $\aalign{x}{1}$				& \verb|$\aalign{x}{1}$| \\ \hline
+% \end{tabular}
+% \end{table}
+% どれも同じような出力ですが、\verb|\mathop|は（\verb|\sum|などの）演算子を表すためのものであり、連生を表すには正しい使い方ではありません。
+% 同様に、数学での関係記号を出力する\verb|\stackrel|も連生においては正しいとは言えません。
+% \verb|\atop|は線のない分数のような出力をします。したがって、ベースライン上に乗らないことが欠点と言えます。
+% \verb|\oalign|は上付き数字を出力するには正確な出力を得ません。
+% このように、デフォルトコマンドでは正しい使い方で連生を上手に表現することができないため、\verb|\aalign|を定義しました。
+%
+% 添字の位置を調整するには、パラメータ\verb|\alignsep|の値を再定義することにより行えます。
+% デフォルトでは1.3に設定され、大きい値に再定義するとより離れて出力されます：\\
+% {$p_{\aalign{x}{1}}$ \renewcommand{\alignsep}{2} \verb|\renewcommand{\alignsep}{2}| $p_{\aalign{x}{1}}$}。
+\newcommand{\alignsep}{1.3}
+\def\aalign{\@ifnextchar[{\@aalign}{\@aalign[]}}
+\def\@aalign[#1]#2#3{
+\mathchoice
+{\@align[#1]{\displaystyle #2}{\scriptstyle #3}}
+{\@align[#1]{\textstyle #2}{\scriptstyle #3}}
+{\@align[#1]{\scriptstyle #2}{\scriptscriptstyle #3}}
+{\@align[#1]{\scriptscriptstyle #2}{\scriptscriptstyle #3}}
+}
+\def\@align{\@ifnextchar[{\@@lign}{\@@lign[]}}
+\def\@@lign[#1]#2#3{
+	\def\@opt{#1}
+	\def\@x{$#2$}
+	\def\@ord{$#3$}
+	\def\sm@sh{s}
+	\settowidth{\dimen1}{\@x}
+	\dimen2=.5\dimen1
+	\settowidth{\dimen3}{\@ord}
+	\dimen4=.5\dimen3
+	\settoheight{\dimen5}{\@x}
+	\dimen5=\alignsep\dimen5
+	\def\@cdjnt{\@x\kern-\dimen1\kern-\dimen4\kern\dimen2{\raisebox{\dimen5}{\@ord}}\kern-\dimen4\kern\dimen2}
+	\ifdim\dimen1>\dimen3
+		\def\@output{\makebox[\dimen1]{\@cdjnt}}
+	\else
+		\def\@output{\makebox[\dimen3]{\@cdjnt}}
+	\fi
+	\ifx\@opt\sm@sh
+		\smash{\@output}
+	\else
+		\@output
+	\fi
+}
+% \end{macro}
+%
+% \begin{macro}{\balign}
+% $ \verb|\balign[#1]{#2}{#3}| $
+%
+% このコマンドは、\verb|#2|の下（\textbf{b}elow）に\verb|#3|を出力します。
+%
+% このコマンドを使用すると、$q_{x}$（\verb|q_{x}|）と比べ添え字の高さが大きくなるため、全体として下に付き過ぎな印象を受けます。
+% これを避けたい場合は、\verb|[#1]|オプションで\verb|s|を指定してください。
+% \verb|\smash|が実行され、高さと深さが0になります。
+% 例：\fbox{$q_{\balign{x}{1}}$} $\to$ \fbox{$q_{\balign[s]{x}{1}}$}（\verb|\fbox{$q_{\balign{x}{1}}$}| $\to$ \verb|\fbox{$q_{\balign[s]{x}{1}}$}|）。\\[1zw]
+% \indent
+% なお、連生の条件（保険事故の順序）を表す記号を出力するこれらのコマンドは、連続して入力すると冗長となる欠点があります。
+% そこで、これらの入力を簡略化したコマンド\verb|\order|をv3にて公開しました。
+% したがって、v3公開までの一時的な代替策として用意した省略コマンド\verb|\aa|, \verb|\ba|の必要性がなくなりましたので、廃止しました。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{cl} \hline
+% 出力 & 入力  \\ \hline \hline
+% $q_{\aalign{x}{1}\balign{y}{2}}$				& \verb|q_{\aalign{x}{1}\balign{y}{2}}| \\ \hline
+% $q_{\balign{x}{1}\aalign{y}{2:3}z}$			& \verb|q_{\balign{x}{1}\aalign{y}{2:3}z}| \\
+% $q_{\balign{x}{1}\aalign[s]{y}{2:3}z}$		& \verb|q_{\balign{x}{1}\aalign[s]{y}{2:3}z}| \\ \hline
+% $a_{\aalign[s]{\overline{xy}}{2} \balign{z}{1}}$	& \verb|a_{\aalign[s]{\overline{xy}}{2} \balign{z}{1}}| \\
+% $a_{\aalign[s]{\joint[-]{xy}}{2} \balign{z}{1}}$	& \verb|a_{\aalign[s]{\joint[-]{xy}}{2} \balign{z}{1}}| \\
+% $a_{\joint[-]{xy}[2] \balign{z}{1}}$			& \verb|a_{{\joint[-]{xy}[2] \balign{z}{1}}| \\ \hline
+% $a_{\aalign[s]{\overbracket{xy}}{2} \balign{z}{1}}$	& \verb|a_{\aalign[s]{\overbracket{xy}}{2} \balign{z}{1}}| \\
+% $a_{\aalign[s]{\joint[^]{xy}}{2} \balign{z}{1}}$	& \verb|a_{\aalign[s]{\joint[^]{xy}}{2} \balign{z}{1}}| \\
+% $a_{\joint[^]{xy}[2] \balign{z}{1}}$			& \verb|a_{\joint[^]{xy}[2]  \balign{z}{1}}| \\ \hline
+% $q_{xy\balign{\joint[-]{zw}}{1}}$				& \verb|q_{xy\balign{\joint[-]{zw}}{1}}| \\ \hline
+% $\lisymb{A}{\aalign{x}{1}y\vert z}{n}$		& \verb/\lisymb{A}{\aalign{x}{1}y|z}{n}/ \\ \hline
+% $M_{\aalign{x+n}{1},y+n}$						& \verb/M_{\aalign{x+n}{1},y+n}/ \\
+% $M_{\aalign[s]{x+n}{1},y+n}$					& \verb/M_{\aalign[s]{x+n}{1},y+n}/ \\ \hline
+% $M_{\balign{x+n}{1},y+n}$						& \verb/M_{\balign{x+n}{1},y+n}/ \\ \hline
+% $M_{\balign[s]{x+n}{1},y+n}$					& \verb/M_{\balign[s]{x+n}{1},y+n}/ \\ \hline
+% \end{tabular}
+% \end{table}
+\def\balign{\@ifnextchar[{\@balign}{\@balign[]}}
+\def\@balign[#1]#2#3{
+\mathchoice
+{\@@balign[#1]{\displaystyle #2}{\scriptstyle #3}}
+{\@@balign[#1]{\textstyle #2}{\scriptstyle #3}}
+{\@@balign[#1]{\scriptstyle #2}{\scriptscriptstyle #3}}
+{\@@balign[#1]{\scriptscriptstyle #2}{\scriptscriptstyle #3}}
+}
+\def\@@balign{\@ifnextchar[{\b@lign}{\b@lign[]}}
+\def\b@lign[#1]#2#3{
+	\def\@opt{#1}
+	\def\@x{$#2$}
+	\def\@ord{$#3$}
+	\def\sm@sh{s}
+	\settowidth{\dimen1}{\@x}
+	\dimen2=.5\dimen1
+	\settowidth{\dimen3}{\@ord}
+	\dimen4=.5\dimen3
+	\settodepth{\dimen5}{\@x}
+	\settoheight{\dimen6}{\@ord}
+	\dimen6=1.2\dimen6
+	\addtolength{\dimen5}{\dimen6}
+	\def\@cdjnt{\@x\kern-\dimen1\kern-\dimen4\kern\dimen2{\raisebox{-\dimen5}{\@ord}}\kern-\dimen4\kern\dimen2}
+	\ifdim\dimen1>\dimen3
+		\def\@output{\makebox[\dimen1]{\@cdjnt}}
+	\else
+		\def\@output{\makebox[\dimen3]{\@cdjnt}}
+	\fi
+	\ifx\@opt\sm@sh
+		\smash{\@output}
+	\else
+		\@output\rule[-1.3\dimen5]{0pt}{0pt}
+	\fi
+}
+% \end{macro}
+%
+% \begin{macro}{\order}
+% $ \verb|\order{| x_{1}, x_{2},\dots \verb|}{| n_{1}, n_{2},\dots \verb|}| $
+%
+% このコマンドは、被保険者列$(x_{i})_{i=1,2,\dots}$のそれぞれの元に対し、保険事故の順番を表す列$(n_{i})_{i=1,2,\dots}$を対応付けて出力するコマンドです。
+% 期間内の保険事故の場合、その番号$n$を上付きで表現するため、引数には\verb|^n|と入力します。
+% 期間外の場合は、下付きで表現するため\verb|_n|と入力します。
+% 列の元が複数ある場合は、それらをカンマで区切ります。
+% 例えば、$\aalign{x}{2}\balign{y}{1}$と出力したい場合、\verb|\order{x,y}{^2,_1}|と入力します。
+% それぞれの列の元の個数が等しくない場合は、少ない個数の方に制限され、それ以降の元は無視されます。
+%
+% また、保険者を表す文字の高さや深さが均一でない場合、その順序を表す文字の位置も不均一に出力されます。
+% そのため、高さや深さを均一にするコマンド\verb|\flattenalign|を用意しました。
+% デフォルトではこの設定が有効になっていますが、これを解除したい場合は\verb|\breakflat|を実行してください。
+%
+% \begin{table}[htbp]
+% \centering
+% {出力例}\\
+% \begin{tabular}{clcl} \hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $p_{\order{x,y,z}{_1,^2,^3}}$			& \verb|p_{\order{x,y,z}{_1,^2,^3}}| &
+% $p_{\order{a,b,c,d}{^1,^2,^3,^4}}$	& \verb|p_{\order{a,b,c,d}{^1,^2,^3,^4}}| \\ \hline
+% $p_{\order{x,y,z}{_1,_2,_3}}$			& \verb|p_{\order{x,y,z}{_1,_2,_3}}| &
+% $p_{\order{x,y}{^1,_2,^3}}$			& \verb|p_{\order{x,y}{^1,_2,^3}}| \\ \hline
+% $p_{\order{x,y,z}{^1,_2}}$			& \verb|p_{\order{x,y,z}{^1,_2}}| & 		&  \\ \hline
+% \end{tabular}
+% \end{table}
+%
+% {\breakflat
+% \begin{table}[htbp]
+% \centering
+% {\verb|\breakflat|後の出力例}\\
+% \begin{tabular}{clcl} \hline
+% 出力 & 入力 & 出力 & 入力 \\ \hline \hline
+% $p_{\order{x,y,z}{_1,^2,^3}}$			& \verb|p_{\order{x,y,z}{_1,^2,^3}}| &
+% $p_{\order{a,b,c,d}{^1,^2,^3,^4}}$	& \verb|p_{\order{a,b,c,d}{^1,^2,^3,^4}}| \\ \hline
+% $p_{\order{x,y,z}{_1,_2,_3}}$			& \verb|p_{\order{x,y,z}{_1,_2,_3}}| &
+% $p_{\order{x,y}{^1,_2,^3}}$			& \verb|p_{\order{x,y}{^1,_2,^3}}| \\ \hline
+% $p_{\order{x,y,z}{^1,_2}}$			& \verb|p_{\order{x,y,z}{^1,_2}}| & 		&  \\ \hline
+% \end{tabular}
+% \end{table}}
+\newcommand{\flattenalign}{\let\fl@tflag\@true}
+\newcommand{\breakflat}{\let\fl@tflag\@false}
+\flattenalign
+%
+\newcounter{@ordoutcnt}
+\newcounter{@ordmidcnt}
+\newcounter{@ordincnt}
+%
+\newcommand\order[2]{
+	\def\@insured{#1}
+	\def\@condition{#2}
+	\def\trimsup^##1{##1}
+	\def\trimsub_##1{##1}
+	\def\@supsymb{^}
+	\def\@subsymb{_}
+	\def\@supflag{p}
+	\def\@subflag{b}
+	\let\suffl@g\@supflag
+	\def\@output{}
+	\ifx\fl@tflag\@true
+		\dimen8\z@
+		\dimen9\z@
+		\@for\insStr:=\@insured\do{
+			\settoheight{\dimen2}{$\insStr$}
+			\ifdim\dimen2>\dimen8
+				\dimen8\dimen2
+			\fi
+			\settodepth{\dimen2}{$\insStr$}
+			\ifdim\dimen2>\dimen9
+				\dimen9\dimen2
+			\fi
+		}
+	\fi
+	\renewcommand{\alignsep}{.9}
+	\setcounter{@ordoutcnt}{0}
+	\@for\insStr:=\@insured\do{
+		\setcounter{@ordmidcnt}{0}
+		\@for\condStr:=\@condition\do{
+			\ifnum\value{@ordmidcnt}=\value{@ordoutcnt}
+				\setcounter{@ordincnt}{0}
+				\expandafter\@tfor\expandafter\identifier\expandafter:\expandafter=\condStr\do{
+					\ifnum\value{@ordincnt}=0
+						\ifx\identifier\@supsymb
+							\let\suffl@g\@supflag
+						\else
+							\ifx\identifier\@subsymb
+								\let\suffl@g\@subflag
+							\fi
+						\fi
+					\fi
+					\ifnum\value{@ordincnt}=1
+						\ifx\suffl@g\@supflag
+							\ifx\fl@tflag\@true
+								\def\@output{\aalign{\rule{0pt}{\dimen8}\insStr}{\expandafter\trimsup\condStr}}
+							\else
+								\def\@output{\aalign{\insStr}{\expandafter\trimsup\condStr}}
+							\fi
+						\else
+							\ifx\suffl@g\@subflag
+								\ifx\fl@tflag\@true
+									\def\@output{\balign{\rule[-\dimen9]{0pt}{0pt}\insStr}{\expandafter\trimsub\condStr}}
+								\else
+									\def\@output{\balign{\insStr}{\expandafter\trimsub\condStr}}
+								\fi
+							\fi
+						\fi
+						\@output
+					\fi
+					\stepcounter{@ordincnt}
+				}
+			\fi
+			\stepcounter{@ordmidcnt}
+		}
+		\stepcounter{@ordoutcnt}
+	}
+}
+% \end{macro}
+%
+% \newpage
+% \section{コマンドの応用}
+% 前節までで定義したコマンドを組み合わせることで、
+% より多くのアクチュアリー記号を出力することができます。
+%
+% \begin{table}[htbp]
+% \centering
+% {応用例}\\
+% \begin{tabular}{cll} \hline
+% 対象 & 出力 & 入力 \\ \hline \hline
+% 累加（逓増）年金		& $(Is)_{\step{n}}$ & \verb|(Is)_{\step{n}}| \\ \hline
+% 						& $\lisymb{(Ia)}{}{n}$ & \verb|\lisymb{(Ia)}{}{n}| \\ \hline
+% 						& $\lisymb{(I\ddot{a})}{}{n}$ & \verb|\lisymb{(I\ddot{a})}{}{n}| \\ \hline
+% 						& $(I\ddot{a})_{\step{n}}$ & \verb|(I\ddot{a})_{\step{n}}| \\ \hline
+% 						& $\lisymb{(I_{\step{m}}a)}{}{n}$ & \verb|\lisymb{(I_{\step{m}}a)}{}{n}| \\ \hline
+% 累加（逓増）生命年金	& $(I\ddot{a})_{x:\step{n}}$ & \verb|(I\ddot{a})_{x:\step{n}}| \\ \hline
+% 						& $\lisymb{(Ia)}{x}{n}$ & \verb|\lisymb{(Ia)}{x}{n}| \\ \hline
+% 						& $\lisymb{(I_{\step{m}}a)}{x}{}$ & \verb|\lisymb{(I_{\step{m}}a)}{x}{}| \\ \hline
+% 累加（逓増）定期保険	& $\termins{(IA)}{x}{n}$ & \verb|\termins{(IA)}{x}{n}| \\ \hline
+% 						& $\termins{(I_{\step{m}}\bar{A})}{x}{n}$ & \verb|\termins{(I_{\step{m}}\bar{A})}{x}{n}| \\ \hline
+% 						& $\termins{(\bar{I}\bar{A})}{x}{}$ & \verb|\termins{(\bar{I}\bar{A})}{x}{}| \\ \hline
+% 完全年金				& $\annuity[o]{\mathring{a}}{x}{n}$ & \verb|\annuity[o]{\mathring{a}}{x}{n}| \\ \hline
+% 						& $\lisymb{\mathring{a}}{x}{n}$ & \verb|\lisymb{\mathring{a}}{x}{n}| \\ \hline
+% 利率の明示			& $\lisymb{a}[1.5\%]{x}{n}$ & \verb|\lisymb{a}[1.5\%]{x}{n}| \\ \hline
+% 短期チルメル式責準	& $\lisymb(t){V}[hz]{x}{n}$ & \verb|\lisymb(t){V}[hz]{x}{n}| \\ \hline
+% 調整純保険料式責準	& $\lisymb(t){V}[I]{x}{n}$ & \verb|\lisymb(t){V}[I]{x}{n}| \\ \hline
+% 分割払連生年金		& $\annuity{a}(k){xy}{n}$ & \verb|\annuity{a}(k){xy}{n}| \\ \hline
+% 最終生存者連生年金	& $\annuity[o]{a}{\joint[-]{xy},\joint[-]{zw}}{n}$ & \verb|\annuity[o]{a}{\joint[-]{xy},\joint[-]{zw}}{n}| \\ \hline
+% 分割払最終生存者		& $\termins{A}(k){\joint[-]{xy}}{n}$ & \verb|\termins{A}(k){\joint[-]{xy}}{n}| \\
+% 連生定期保険料		& $\lisymb{A}(k){\joint[ns,-]{xy}[1]}{n}$ & \verb|\lisymb{A}(k){\joint[ns,-]{xy}[1]}{n}| \\
+% 						& $\lisymb{A}{\joint[-]{xy}[1]}{n}{}^{\fracpay{k}}$ & \verb|\lisymb{A}{\joint[-]{xy}[1]}{n}{}^{\fracpay{k}}| \\ \hline
+% \end{tabular}
+% \end{table}
+% 次のページに続きます。
+% \begin{table}[htbp]
+% \centering
+% {応用例}\\
+% \begin{tabular}{cll} \hline
+% 対象 & 出力 & 入力 \\ \hline \hline
+% 遺族年金				& $\annuity[o]{a}{xy \vert z}{n}$ & \verb/\annuity[o]{a}{xy|z}{n}/ \\ \hline
+% 						& $\annuity[o]{a}{xy \vert z}{n}$ & \verb/\annuity[o]{a}{xy \vert z}{n}/ \\ \hline
+% 即時開始復帰年金		& $\annuity[o]{\hat{a}}{x \vert y}{n}$ & \verb/\annuity[o]{\hat{a}}{x|y}{n}/ \\ \hline
+% 						& $\annuity[o]{\widehat{a}}{x \vert y}{n}$ & \verb/\annuity[o]{\widehat{a}}{x|y}{n}/ \\ \hline
+% 即時開始完全年金		& $\annuity[o]{\hat{\mathring{a}}}(k){x \vert y}{}$ & \verb/\annuity[o]{\hat{\mathring{a}}}(k){x|y}{}/ \\ \hline
+% 条件付き連生			& $\annuity{a}{\order{x,y,z,w,v}{^3,_1,^4:6,^5:7,_2}}{n}$ & \verb|\annuity{a}{\order{x,y,z,w,v}{^3,_1,^4:6,^5:7,_2}}{n}| \\ \hline
+% 就業年金				& $\annuity{a}{x}{n}^{aa}$	& \verb|\annuity{a}{x}{n}^{aa}| \\ \hline
+% 						& $\annuity{a}{x}{n}^{i}$	& \verb|\annuity{a}{x}{n}^{i}| \\ \hline
+% 						& $\annuity{a}{x}{n}^{a(i:\step{m})}$	& \verb|\annuity{a}{x}{n}^{a(i:\step{m})}| \\ \hline
+% 						& $\annuity{a}(k){x}{n}^{aa}$	& \verb|\annuity{a}(k){x}{n}^{aa}| \\ \hline
+% 						& $\annuity{a}{x}{n}^{aa\fp{k}}$	& \verb|\annuity{a}{x}{n}^{aa \fp{k}}| \\ \hline
+% 保険料払込免除特約	& $\annuity{a}{x+t}{n-1-t}^{a(i:\step{y-x-t})}$	& \verb|\annuity{a}{x+t}{n-1-t}^{a(i:\step{y-x-t})}| \\ \hline
+% 複雑な遺族年金		& $\annuity[o]{\hat{a}}{x \vert y}{n}^{(a+I)W}$	& \verb|\annuity[o]{\hat{a}}{x \vert y}{n}^{(a+I)W}| \\ \hline
+% \end{tabular}
+% \end{table}
+%
+% \newpage
+% \section{最後に}
+%
+% このマクロを作成するにあたって、
+% 生保数理や記号の参考に文献\cite{Hutami}、\cite{Yamauchi}を、パッケージ作成に文献\cite{Okumura}、\cite{Hujita}、\cite{Mittelbach}を
+% それぞれ参照しました。
+% \begin{thebibliography}{9}
+% \bibitem{Hutami} 二見隆、生命保険数学（上・下）、生命保険文化研究所、1999。
+% \bibitem{Yamauchi} 山内恒人、生命保険数学の基礎---アクチュアリー数学入門---、東京大学出版会、2009。
+% \bibitem{Okumura} 奥村晴彦、\LaTeXe 美文書作成入門、技術評論社、2007。
+% \bibitem{Hujita} 藤田眞作、\LaTeXe コマンドブック、ソフトバンクパブリッシング、2004。
+% \bibitem{Mittelbach} F. Mittelbach, M. Goossens, The \LaTeX companion 2nd edi, Addison-Wesley, 2004.
+% \end{thebibliography}
+% \Finale

@@ -1,0 +1,771 @@
+%%
+%% This is file `lifeins.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lifeins.dtx  (with options: `package')
+%%
+%% IMPORTANT NOTICE:
+%%
+%% For the copyright see the source file.
+%%
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from lifeins.sty.
+%%
+%% For distribution of the original source see the terms
+%% for copying and modification in the file lifeins.dtx.
+%%
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesPackage{lifeins}[2012/01/15 v3.1 Life actuarial symbols]%
+\PackageInfo{lifeins}{This package provides commands to type life actuarial symbols}
+\makeatletter
+\newlength{\w@tempLI}
+\newlength{\h@tempLI}
+\newlength{\l@tempLI}
+\newlength{\d@tempLI}
+\newlength{\t@tempLI}
+\newlength{\@tempwa}
+\newlength{\@tempwb}
+\newlength{\@tempwc}
+\newlength{\@templ}
+\def\n@temp{}
+\def\opw@temp{$\scriptstyle \n@temp$}
+\def\@lispan{%
+\settowidth{\w@tempLI}{\opw@temp}
+\settoheight{\h@tempLI}{\opw@temp}
+\settodepth{\d@tempLI}{\opw@temp}
+\settoheight{\t@tempLI}{\opw@temp}
+\addtolength{\t@tempLI}{\d@tempLI}
+\addtolength{\h@tempLI}{.8pt}
+\addtolength{\d@tempLI}{.5pt}
+\addtolength{\t@tempLI}{1.6pt}
+\kern .05em\llap{\rule[\h@tempLI]{\w@tempLI}{.3pt}\rule[-\d@tempLI]{.3pt}{\t@tempLI}}}
+\def\@true{t}
+\def\@false{f}
+\newcommand{\fracpay}[1]{(\mkern-1mu#1\mkern-1mu)}
+\let\fp\fracpay
+\newcommand{\step}[1]{
+\mathchoice
+{\@step{\displaystyle #1}}
+{\@step{\textstyle #1}}
+{\@step{\scriptstyle #1}}
+{\@step{\scriptscriptstyle #1}}
+}
+\newcommand{\@step}[1]{%
+\def\@var{\ensuremath{#1}}
+\settowidth{\@tempwa}{\@var}
+\settoheight{\@tempwb}{\@var}
+\settodepth{\@tempwc}{\@var}
+\settoheight{\@templ}{\@var}
+\addtolength{\@templ}{\@tempwc}
+\addtolength{\@tempwb}{.8pt}
+\addtolength{\@tempwc}{.5pt}
+\addtolength{\@templ}{1.6pt}
+\@var\kern .05em\llap{\rule[\@tempwb]{\@tempwa}{.3pt}\rule[-\@tempwc]{.3pt}{\@templ}}
+}
+\def\overbracket#1{
+\mathchoice{\@ob{\displaystyle #1}}{\@ob{\textstyle #1}}{\@ob{\scriptstyle #1}}{\@ob{\scriptscriptstyle #1}}
+}
+\def\@ob#1{
+\setbox0=\hbox{\ensuremath{#1}}
+\dimen0=1.3\ht0
+\advance \dimen0 by -1.7\p@
+\rule[\dimen0]{.3\p@}{2\p@}\rule[1.3\ht0]{\wd0}{.3\p@}\rule[\dimen0]{.3\p@}{2\p@}\llap{\box0\kern.056\p@}
+}
+\def\overtortoise#1{
+\mathchoice{\@otsb{\displaystyle #1}}{\@otsb{\textstyle #1}}{\@otsb{\scriptstyle #1}}{\@otsb{\scriptscriptstyle #1}}
+}
+\def\@otsb#1{
+\setbox0=\hbox{\ensuremath{#1}}
+\dimen0=1.3\ht0
+\advance \dimen0 by -1.7\p@
+\dimen1=\wd0
+\advance \dimen1 by -1pt
+\raisebox{\dimen0}{\@upline}\rule[1.3\ht0]{\dimen1}{.3\p@}\raisebox{\dimen0}{\@downline}\llap{\box0\kern.5pt}
+}
+\def\@upline{%
+\begin{picture}(0.895,0)
+\multiput(0,0)(.00358,.00716){250}{\rule{.21pt}{.21pt}}
+\end{picture}%
+}
+\def\@downline{%
+\begin{picture}(0.895,0)
+\put(0,1.7){\rule{.1pt}{.3pt}}\kern-.1pt
+\multiput(0,1.79)(.00358,-.00716){250}{\rule{.21pt}{.21pt}}
+\end{picture}%
+}
+\def\od{\@ifnextchar[{\@od}{\@od[]}}
+\def\@od[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\@dsymb^{\@n} \@y}
+\def\@dx{\@dsymb \@x^{\@n}}
+\frac{\@dy}{\@dx}
+}
+\def\textod{\@ifnextchar[{\@textod}{\@textod[]}}
+\def\@textod[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\@dsymb^{\@n} \@y}
+\def\@dx{\@dsymb \@x^{\@n}}
+\@dy/\@dx
+}
+\newcommand\@dsymb{}
+\newcommand\setDiffSymb[2]{
+\def\@arg{#2}
+\ifx\@arg\empty
+\def\@arg{d}
+\fi
+\renewcommand\@dsymb[1][\@arg]{
+\def\@dsformat{#1}
+\def\@italic{italic}
+\ifx\@dsformat\@italic
+{##1}
+\else
+\mathrm{##1}
+\fi
+}
+}
+\setDiffSymb{roman}{d}
+\def\pd{\@ifnextchar[{\@pd}{\@pd[]}}
+\def\@pd[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\partial^{\@n} \@y}
+\def\@dx{\partial \@x^{\@n}}
+\frac{\@dy}{\@dx}
+}
+\def\pdd{\@ifnextchar[{\@pdd}{\@pdd[]}}
+\def\@pdd[#1]#2#3{\@ifnextchar[{\@@pdd[#1]#2#3}{\@@pdd[#1]#2#3[]}}
+\def\@@pdd[#1]#2#3[#4]#5{\@ifnextchar[{\@@@pdd[#1]#2#3[#4]#5}{\@@@pdd[#1]#2#3[#4]#5[]}}
+\def\@@@pdd[#1]#2#3[#4]#5[#6]{
+\def\@n{#1}
+\def\@f{#2}
+\def\@x{#3}
+\def\@a{#4}
+\def\@y{#5}
+\def\@b{#6}
+\def\@df{\partial^{\@n} \@f}
+\def\@dx{\partial \@x^{\@a}}
+\def\@dy{\partial \@y^{\@b}}
+\frac{\@df}{\@dx \@dy}
+}
+\def\textpd{\@ifnextchar[{\@textpd}{\@textpd[]}}
+\def\@textpd[#1]#2#3{
+\def\@n{#1}
+\def\@y{#2}
+\def\@x{#3}
+\def\@dy{\partial^{\@n} \@y}
+\def\@dx{\partial \@x^{\@n}}
+\@dy/\@dx
+}
+\def\lisymb{\@ifnextchar[{\lisymb@}{\lisymb@[]}}
+\def\lisymb@[#1]{\@ifnextchar({\@lisymb@[#1]}{\@lisymb@[#1]()}}
+\def\@lisymb@[#1](#2){\@ifnextchar<{\@@lisymb@[#1](#2)}{\@@lisymb@[#1](#2)<>}}
+\def\@@lisymb@[#1](#2)<#3>#4{\@ifnextchar[{\@@lisymb[#1](#2)<#3>#4}{\@@lisymb[#1](#2)<#3>{#4}[]}}
+\def\@@lisymb[#1](#2)<#3>#4[#5]{\@ifnextchar({\@lisymb[#1](#2)<#3>#4[#5]}{\@lisymb[#1](#2)<#3>{#4}[#5]()}}
+\def\@lisymb[#1](#2)<#3>#4[#5](#6)#7#8{%
+\def\p@temp{#1}
+\def\t@temp{#2}
+\def\m@temp{#3}
+\def\V@temp{#4}
+\def\z@temp{#5}
+\def\k@temp{#6}
+\def\x@temp{#7}
+\def\n@temp{#8}
+\def\mod@tmp{mod}
+\def\grs@tmp{*}
+\def\opw@temp{$\scriptstyle \n@temp$}
+\dimen0=0pt
+\dimen1=1pt
+\def\@sort{\V@temp}
+\@for\TmpStr:=\p@temp\do{
+\ifx\TmpStr\mod@tmp
+\def\@sort{\bar{\V@temp}}
+\else
+\ifx\TmpStr\grs@tmp
+\dimen0=\dimen1
+\fi
+\fi
+}
+\settoheight{\dimen2}{$\scriptstyle \x@temp:\n@temp\@lispan$}
+\settodepth{\dimen3}{$\scriptstyle \x@temp:\n@temp\@lispan$}
+\settodepth{\dimen4}{${\scriptscriptstyle [\z@temp]} {\scriptstyle \fracpay{\k@temp}}$}
+\settoheight{\dimen5}{${\scriptscriptstyle [\z@temp]} {\scriptstyle \fracpay{\k@temp}}$}
+\dimen6=7.5pt
+\dimen7=4.5pt
+\ifnum\dimen2>\dimen6
+\addtolength{\dimen2}{-.5ex}
+\else
+\ifnum\dimen2>\dimen7
+\addtolength{\dimen4}{.2ex}
+\fi
+\dimen2=4.11389pt
+\fi
+\ifx\x@temp\empty
+\ifx\n@temp\empty
+\def\sort@{\@sort}
+\else
+\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \n@temp\@lispan}$}}}
+\fi
+\else
+\ifx\n@temp\empty
+\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \x@temp}$}}}
+\else
+\def\sort@{\@sort_{\raisebox{0pt}[\dimen2][\dimen3]{${\scriptstyle \x@temp:\n@temp\@lispan}$}}}
+\fi
+\fi
+\ifnum\dimen0=\dimen1
+\ifx\z@temp\empty
+\ifx\k@temp\empty
+\def\sort@@{\sort@^{*}}
+\else
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptstyle \fracpay{\k@temp}*}$}}}
+\fi
+\else
+\def\z@@temp{[\kern-.05em\expandafter\@tfor\expandafter\TempStr\expandafter:\expandafter=\z@temp\do{\TempStr\kern-.1em}\kern.1em]}
+\ifx\k@temp\empty
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle *}$}}}
+\else
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle \fracpay{\k@temp}*}$}}}
+\fi
+\fi
+\else
+\ifx\z@temp\empty
+\ifx\k@temp\empty
+\def\sort@@{\sort@}
+\else
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptstyle \fracpay{\k@temp}}$}}}
+\fi
+\else
+\def\z@@temp{[\expandafter\@tfor\expandafter\TempStr\expandafter:\expandafter=\z@temp\do{\TempStr\kern-.1em}\kern.05em]}
+\ifx\k@temp\empty
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}$}}}
+\else
+\def\sort@@{\sort@^{\raisebox{0pt}[\dimen5][\dimen4]{${\scriptscriptstyle \z@@temp}{\scriptstyle \fracpay{\k@temp}}$}}}
+\fi
+\fi
+\fi
+\ifx\t@temp\empty
+\ifx\m@temp\empty
+\sort@@
+\else
+{}^{\m@temp}\sort@@
+\fi
+\else
+\ifx\m@temp\empty
+\ifx\x@temp\empty
+\ifx\n@temp\empty
+{}_{\t@temp}\sort@@
+\else
+{}_{\t@temp}^{}\sort@@
+\fi
+\else
+{}_{\t@temp}^{}\sort@@
+\fi
+\else
+\settowidth{\@tempwa}{${}^{\m@temp}$}
+\settowidth{\@tempwb}{${}^{m.}$}
+\settowidth{\@tempwc}{${}^{\t@temp}$}
+\settowidth{\@templ}{${}_{t.}$}
+\ifnum\@tempwa>\@tempwc
+\dimen6=\@tempwa
+\else
+\dimen6=\@tempwc
+\fi
+\ifnum\@tempwa>\@tempwb
+\makebox[\dimen6][r]{${}_{\t@temp}^{}$\raisebox{.2ex}{\makebox[0pt][r]{${}^{\m@temp}$}}}\sort@@
+\else
+\ifnum\@tempwc>\@templ
+\makebox[\dimen6][r]{${}_{\t@temp}^{}$\raisebox{.2ex}{\makebox[0pt][r]{${}^{\m@temp}$}}}\sort@@
+\else
+\makebox[\dimen6][r]{${}_{\t@temp}^{}$\llap{\raisebox{.2ex}{${}^{\m@temp}$}}}\sort@@
+\fi
+\fi
+\fi
+\fi
+}
+\def\defer#1#2{
+\def\f@temp{#1}
+\ifx\f@temp\empty
+{}_{#2}
+\else
+{}_{#1|#2}
+\fi}
+\def\annuity{\@ifnextchar[{\annuity@}{\annuity@[]}}
+\def\annuity@[#1]{\@ifnextchar({\@annuity@[#1]}{\@annuity@[#1]()}}
+\def\@annuity@[#1](#2)#3{\@ifnextchar({\@annuity[#1](#2)#3}{\@annuity[#1](#2)#3()}}
+\def\@annuity[#1](#2)#3(#4)#5#6{
+\def\@tempopt{#1}
+\def\@tempf{#2}
+\def\@tempa{#3}
+\def\@tempk{#4}
+\def\@tempx{#5}
+\def\@tempn{#6}
+\def\@tempinf{inf}
+\def\@tempo{o}
+\def\@tempmod{mod}
+\ifx\@tempk\@tempinf
+\def\@temps{\bar{\@tempa}}
+\else
+\ifx\@tempopt\@tempo
+\def\@temps{\@tempa}
+\else
+\ifx\@tempopt\@tempmod
+\def\@temps{\bar{\@tempa}}
+\else
+\def\@temps{\ddot{\@tempa}}
+\fi
+\fi
+\fi
+\ifx\@tempk\@tempinf
+\ifx\@tempf\empty
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb{\@temps}{}{}
+\else
+\lisymb{\@temps}{}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb{\@temps}{\@tempx}{}
+\else
+\lisymb{\@temps}{\@tempx}{\@tempn}
+\fi
+\fi
+\else
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}{}{}
+\else
+\lisymb(\@tempf|){\@temps}{}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}{\@tempx}{}
+\else
+\lisymb(\@tempf|){\@temps}{\@tempx}{\@tempn}
+\fi
+\fi
+\fi
+\else
+\ifx\@tempk\empty
+\ifx\@tempf\empty
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb{\@temps}{}{}
+\else
+\lisymb{\@temps}{}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb{\@temps}{\@tempx}{}
+\else
+\lisymb{\@temps}{\@tempx}{\@tempn}
+\fi
+\fi
+\else
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}{}{}
+\else
+\lisymb(\@tempf|){\@temps}{}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}{\@tempx}{}
+\else
+\lisymb(\@tempf|){\@temps}{\@tempx}{\@tempn}
+\fi
+\fi
+\fi
+\else
+\ifx\@tempf\empty
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb{\@temps}(\@tempk){}{}
+\else
+\lisymb{\@temps}(\@tempk){}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb{\@temps}(\@tempk){\@tempx}{}
+\else
+\lisymb{\@temps}(\@tempk){\@tempx}{\@tempn}
+\fi
+\fi
+\else
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}(\@tempk){}{}
+\else
+\lisymb(\@tempf|){\@temps}(\@tempk){}{\@tempn}
+\fi
+\else
+\ifx\@tempn\empty
+\lisymb(\@tempf|){\@temps}(\@tempk){\@tempx}{}
+\else
+\lisymb(\@tempf|){\@temps}(\@tempk){\@tempx}{\@tempn}
+\fi
+\fi
+\fi
+\fi
+\fi
+}
+\def\pureendow#1{\@ifnextchar({\@pureendow#1}{\@pureendow#1()}}
+\def\@pureendow#1(#2)#3#4{
+\def\k@tmp{#2}
+\def\join@tmp{#3}
+\def\whole@tmp{#4}
+\settowidth{\@tempwa}{$\scriptstyle #4$}
+\settoheight{\dimen0}{$\scriptstyle #3:\step{#4}$}
+\dimen1=5.6pt
+\dimen2=5.4pt
+\ifnum\dimen0>\dimen1
+\@tempwb=.4ex
+\else
+\ifnum\dimen0>\dimen2
+\@tempwb=.3ex
+\else
+\@tempwb=.2ex
+\fi
+\fi
+\def\@out{\lisymb{#1}{#3}{#4}\kern-\@tempwa\makebox[\@tempwa]{${}^{\raisebox{\@tempwb}{$\scriptscriptstyle 1$}}$}}
+\ifx\k@tmp\empty
+\@out
+\else
+\@out{}^{\fracpay{\k@tmp}}
+\fi
+}
+\def\termins{\@ifnextchar[{\@@termins}{\@@termins[]}}
+\def\@@termins[#1]#2{\@ifnextchar({\@@termins@[#1]{#2}}{\@@termins@[#1]{#2}()}}
+\def\@@termins@[#1]#2(#3){\@ifnextchar[{\@termins[#1]{#2}(#3)}{\@termins[#1]{#2}(#3)[]}}
+\def\@termins[#1]#2(#3)[#4]#5#6{
+\def\@tempopt{#1}
+\def\@temps{#2{}}
+\def\@tempk{#3}
+\def\@tempg{#4}
+\def\@tempx{#5}
+\def\@tempn{#6}
+\def\@tempmod{mod}
+\def\@tempgrs{*}
+\ifx\@tempopt\@tempmod
+\ifx\@tempx\empty
+\ifx\@tempn\empty
+\def\@tempS{\lisymb[mod]{\@temps}{}{}}
+\else
+\def\@tempS{\lisymb[mod]{\@temps}{}{\@tempn}}
+\fi
+\else
+\ifx\@tempn\empty
+\def\@tempS{\lisymb[mod]{\@temps}{\@tempx}{}}
+\else
+\def\@tempS{\lisymb[mod]{\@temps}{\@tempx}{\@tempn}}
+\fi
+\fi
+\else
+\ifx\@tempn\empty
+\ifx\@tempx\empty
+\def\@tempS{\lisymb{\@temps}{}{}}
+\else
+\def\@tempS{\lisymb{\@temps}{\@tempx}{}}
+\fi
+\else
+\ifx\@tempx\empty
+\def\@tempS{\lisymb{\@temps}{}{\@tempn}}
+\else
+\def\@tempS{\lisymb{\@temps}{\@tempx}{\@tempn}}
+\fi
+\fi
+\fi
+\settowidth{\@tempwa}{$\scriptstyle \@tempx$}
+\settowidth{\@tempwb}{$\scriptstyle :\@tempn$}
+\settoheight{\dimen8}{$\scriptstyle \@tempx:\step{\@tempn}$}
+\dimen5=5.5pt
+\dimen7=7pt
+\ifnum\dimen8>\dimen7
+\@tempwc=.5ex
+\@templ=.9ex
+\else
+\ifnum\dimen8>\dimen5
+\@tempwc=.3ex
+\@templ=.6ex
+\else
+\@tempwc=.1ex
+\@templ=.4ex
+\fi
+\fi
+\ifx\@tempg\@tempgrs
+\ifx\@tempn\empty
+\ifx\@tempx\empty
+\ifx\@tempk\empty
+\@tempS{}^{*}
+\else
+\@tempS{}^{\kpay{\@tempk}*}
+\fi
+\else
+\ifx\@tempk\empty
+\@tempS^{*}
+\else
+\@tempS^{\scriptstyle \fracpay{\@tempk}*}
+\fi
+\fi
+\else
+\ifx\@tempx\empty
+\settowidth{\@tempwa}{${}^{\scriptscriptstyle 1}$}
+\ifx\@tempk\empty
+\@tempS\kern-\@tempwb\makebox[\@tempwa]{${}^{*}$}\kern\@tempwb
+\else
+\@tempS\kern-\@tempwb{}^{\kern.5em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}*}$}}}
+\fi
+\else
+\ifx\@tempk\empty
+\@tempS\kern-\@tempwa\kern-\@tempwb\makebox[\@tempwa]{${}^{\kern.5em\raisebox{\@tempwc}{$\scriptscriptstyle 1$}\kern.1em\raisebox{.2ex}{$\scriptstyle *$}}$}\kern\@tempwb
+\else
+\@tempS\kern-\@tempwa\kern-\@tempwb{}^{\kern-.1em\raisebox{\@tempwc}{\makebox[\@tempwa]{${\scriptscriptstyle 1}$}}\raisebox{\@templ}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}\kern.1em\raisebox{.2ex}{$\scriptstyle *$}}
+\fi
+\fi
+\fi
+\else
+\ifx\@tempn\empty
+\ifx\@tempx\empty
+\ifx\@tempk\empty
+\@tempS{}^{\scriptscriptstyle 1}
+\else
+\@tempS{}^{{\scriptscriptstyle 1}\raisebox{.4ex}{${\scriptstyle \fracpay{\@tempk}}$}}
+\fi
+\else
+\ifx\@tempk\empty
+\@tempS
+\else
+\settowidth{\@tempwb}{$\scriptstyle :n$}
+\@tempS^{\scriptstyle \fracpay{\@tempk}}
+\fi
+\fi
+\else
+\ifx\@tempx\empty
+\settowidth{\@tempwa}{${}^{\scriptscriptstyle 1}$}
+\ifx\@tempk\empty
+\@tempS\kern-\@tempwb\makebox[\@tempwa]{${}^{\scriptscriptstyle 1}$}\kern\@tempwb
+\else
+\@tempS\kern-\@tempwb{}^{\makebox[\@tempwa]{${\scriptscriptstyle 1}$}\kern.1em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}}
+\fi
+\else
+\ifx\@tempk\empty
+\@tempS\kern-\@tempwa\kern-\@tempwb\kern-.05em\makebox[\@tempwa]{${}^{\scriptscriptstyle 1}$}\kern.05em\kern\@tempwb
+\else
+\@tempS\kern-\@tempwa\kern-\@tempwb{}^{\kern-.1em\makebox[\@tempwa]{${\scriptscriptstyle 1}$}\kern.2em\raisebox{.4ex}{\makebox[\@tempwb]{${\scriptstyle \fracpay{\@tempk}}$}}}
+\fi
+\fi
+\fi
+\fi
+}
+\def\endow{\@ifnextchar[{\endow@}{\endow@[]}}
+\def\endow@[#1]{\@ifnextchar({\@endow@[#1]}{\@endow@[#1]()}}
+\def\@endow@[#1](#2)#3{\@ifnextchar({\@@endow[#1](#2){#3}}{\@@endow[#1](#2){#3}()}}
+\def\@@endow[#1](#2)#3(#4){\@ifnextchar[{\@endow[#1](#2){#3}(#4)}{\@endow[#1](#2){#3}(#4)[]}}
+\def\@endow[#1](#2)#3(#4)[#5]#6#7{\lisymb[#1,#5](#2){#3}(#4){#6}{#7}}
+\def\joint{\@ifnextchar[{\@joint}{\@joint[]}}
+\def\@joint[#1]#2{\@ifnextchar({\@@joint[#1]{#2}}{\@@joint[#1]{#2}()}}
+\def\@@joint[#1]#2(#3){\@ifnextchar[{\joint@[#1]{#2}(#3)}{\joint@[#1]{#2}(#3)[]}}
+\def\joint@[#1]#2(#3)[#4]{
+\def\@tempol{#1}
+\def\@tempxy{#2}
+\def\@tempm{#3}
+\def\@tempr{#4}
+\def\@overline{-}
+\let\@olflag=\empty
+\def\@overtsb{^}
+\let\@obflag=\empty
+\def\@nsmash{ns}
+\let\@nsmashflag=\empty
+\def\m@thchoiced{\mathchoice{\displaystyle}{\scriptstyle}{\scriptscriptstyle}{\scriptscriptstyle}}
+\@for\TmpStr:=\@tempol\do{
+\ifx\TmpStr\@overline
+\let\@olflag=\@true
+\else
+\ifx\TmpStr\@overtsb
+\let\@obflag=\@true
+\else
+\ifx\TmpStr\@nsmash
+\let\@nsmashflag=\@true
+\fi
+\fi
+\fi
+}
+\ifx\@tempm\empty
+\def\@output{\@tempxy}
+\else
+\def\@output{\@tempxy \cdots {\m@thchoiced (}\@tempm{\m@thchoiced )}}
+\fi
+\ifx\@olflag\@true
+\def\@@output{\overline{\@output}}
+\else
+\ifx\@obflag\@true
+\def\@@output{\kern.1em\overtortoise{\@output}\kern.1em}
+\else
+\def\@@output{\@output}
+\fi
+\fi
+\ifx\@tempr\empty
+\@@output
+\else
+\ifx\@nsmashflag\@true
+\stackrel{\@tempr}{\@@output}
+\else
+\smash{\stackrel{\@tempr}{\@@output}}
+\fi
+\fi
+}
+\newcommand{\alignsep}{1.3}
+\def\aalign{\@ifnextchar[{\@aalign}{\@aalign[]}}
+\def\@aalign[#1]#2#3{
+\mathchoice
+{\@align[#1]{\displaystyle #2}{\scriptstyle #3}}
+{\@align[#1]{\textstyle #2}{\scriptstyle #3}}
+{\@align[#1]{\scriptstyle #2}{\scriptscriptstyle #3}}
+{\@align[#1]{\scriptscriptstyle #2}{\scriptscriptstyle #3}}
+}
+\def\@align{\@ifnextchar[{\@@lign}{\@@lign[]}}
+\def\@@lign[#1]#2#3{
+\def\@opt{#1}
+\def\@x{$#2$}
+\def\@ord{$#3$}
+\def\sm@sh{s}
+\settowidth{\dimen1}{\@x}
+\dimen2=.5\dimen1
+\settowidth{\dimen3}{\@ord}
+\dimen4=.5\dimen3
+\settoheight{\dimen5}{\@x}
+\dimen5=\alignsep\dimen5
+\def\@cdjnt{\@x\kern-\dimen1\kern-\dimen4\kern\dimen2{\raisebox{\dimen5}{\@ord}}\kern-\dimen4\kern\dimen2}
+\ifdim\dimen1>\dimen3
+\def\@output{\makebox[\dimen1]{\@cdjnt}}
+\else
+\def\@output{\makebox[\dimen3]{\@cdjnt}}
+\fi
+\ifx\@opt\sm@sh
+\smash{\@output}
+\else
+\@output
+\fi
+}
+\def\balign{\@ifnextchar[{\@balign}{\@balign[]}}
+\def\@balign[#1]#2#3{
+\mathchoice
+{\@@balign[#1]{\displaystyle #2}{\scriptstyle #3}}
+{\@@balign[#1]{\textstyle #2}{\scriptstyle #3}}
+{\@@balign[#1]{\scriptstyle #2}{\scriptscriptstyle #3}}
+{\@@balign[#1]{\scriptscriptstyle #2}{\scriptscriptstyle #3}}
+}
+\def\@@balign{\@ifnextchar[{\b@lign}{\b@lign[]}}
+\def\b@lign[#1]#2#3{
+\def\@opt{#1}
+\def\@x{$#2$}
+\def\@ord{$#3$}
+\def\sm@sh{s}
+\settowidth{\dimen1}{\@x}
+\dimen2=.5\dimen1
+\settowidth{\dimen3}{\@ord}
+\dimen4=.5\dimen3
+\settodepth{\dimen5}{\@x}
+\settoheight{\dimen6}{\@ord}
+\dimen6=1.2\dimen6
+\addtolength{\dimen5}{\dimen6}
+\def\@cdjnt{\@x\kern-\dimen1\kern-\dimen4\kern\dimen2{\raisebox{-\dimen5}{\@ord}}\kern-\dimen4\kern\dimen2}
+\ifdim\dimen1>\dimen3
+\def\@output{\makebox[\dimen1]{\@cdjnt}}
+\else
+\def\@output{\makebox[\dimen3]{\@cdjnt}}
+\fi
+\ifx\@opt\sm@sh
+\smash{\@output}
+\else
+\@output\rule[-1.3\dimen5]{0pt}{0pt}
+\fi
+}
+\newcommand{\flattenalign}{\let\fl@tflag\@true}
+\newcommand{\breakflat}{\let\fl@tflag\@false}
+\flattenalign
+\newcounter{@ordoutcnt}
+\newcounter{@ordmidcnt}
+\newcounter{@ordincnt}
+\newcommand\order[2]{
+\def\@insured{#1}
+\def\@condition{#2}
+\def\trimsup^##1{##1}
+\def\trimsub_##1{##1}
+\def\@supsymb{^}
+\def\@subsymb{_}
+\def\@supflag{p}
+\def\@subflag{b}
+\let\suffl@g\@supflag
+\def\@output{}
+\ifx\fl@tflag\@true
+\dimen8\z@
+\dimen9\z@
+\@for\insStr:=\@insured\do{
+\settoheight{\dimen2}{$\insStr$}
+\ifdim\dimen2>\dimen8
+\dimen8\dimen2
+\fi
+\settodepth{\dimen2}{$\insStr$}
+\ifdim\dimen2>\dimen9
+\dimen9\dimen2
+\fi
+}
+\fi
+\renewcommand{\alignsep}{.9}
+\setcounter{@ordoutcnt}{0}
+\@for\insStr:=\@insured\do{
+\setcounter{@ordmidcnt}{0}
+\@for\condStr:=\@condition\do{
+\ifnum\value{@ordmidcnt}=\value{@ordoutcnt}
+\setcounter{@ordincnt}{0}
+\expandafter\@tfor\expandafter\identifier\expandafter:\expandafter=\condStr\do{
+\ifnum\value{@ordincnt}=0
+\ifx\identifier\@supsymb
+\let\suffl@g\@supflag
+\else
+\ifx\identifier\@subsymb
+\let\suffl@g\@subflag
+\fi
+\fi
+\fi
+\ifnum\value{@ordincnt}=1
+\ifx\suffl@g\@supflag
+\ifx\fl@tflag\@true
+\def\@output{\aalign{\rule{0pt}{\dimen8}\insStr}{\expandafter\trimsup\condStr}}
+\else
+\def\@output{\aalign{\insStr}{\expandafter\trimsup\condStr}}
+\fi
+\else
+\ifx\suffl@g\@subflag
+\ifx\fl@tflag\@true
+\def\@output{\balign{\rule[-\dimen9]{0pt}{0pt}\insStr}{\expandafter\trimsub\condStr}}
+\else
+\def\@output{\balign{\insStr}{\expandafter\trimsub\condStr}}
+\fi
+\fi
+\fi
+\@output
+\fi
+\stepcounter{@ordincnt}
+}
+\fi
+\stepcounter{@ordmidcnt}
+}
+\stepcounter{@ordoutcnt}
+}
+}
+\endinput
+%%
+%% End of file `lifeins.sty'.
